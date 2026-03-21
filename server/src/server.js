@@ -47,6 +47,7 @@ connectDB();
 app.use(helmet());
 app.use(cors({
   origin: [
+    "https://stakepedia.vercel.app",
     process.env.CLIENT_URL || "http://localhost:5173",
     process.env.ADMIN_URL || "http://localhost:5174",
   ],
