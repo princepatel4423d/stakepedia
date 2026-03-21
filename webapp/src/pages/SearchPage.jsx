@@ -169,7 +169,6 @@ export default function SearchPage() {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Search AI tools, blogs, courses, prompts..."
             className="w-full h-14 pl-12 pr-32 rounded-2xl border border-border bg-card text-base focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all shadow-sm"
-            autoFocus
           />
           <button
             type="submit"

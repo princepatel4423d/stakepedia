@@ -225,7 +225,7 @@ export default function Navbar({ transparent = false }) {
                   </button>
                 </SheetTrigger>
 
-                <SheetContent side="left" className="w-70 sm:w-[320px] p-0 flex flex-col">
+                <SheetContent onOpenAutoFocus={(e) => e.preventDefault()} side="left" className="w-70 sm:w-[320px] p-0 flex flex-col">
 
                   {/* Sidebar header */}
                   <SheetHeader className="px-5 py-5 border-b shrink-0">
