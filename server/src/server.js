@@ -101,13 +101,20 @@ app.use(notFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, async () => {
-  console.log(`\nServer running in ${process.env.NODE_ENV} mode on port ${PORT}`);
-  console.log(`API Base:  http://localhost:${PORT}/api/v1`);
-  console.log(`Health:   http://localhost:${PORT}/api/health\n`);
-  await verifyCloudinaryConnection();
-  await verifyMailerConnection();
-  await seedSuperAdmin();
-  await seedDefaultSettings();
-  startCronJobs();
-});
+
+// Only run locally
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, async () => {
+    console.log(`\nServer running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+    console.log(`API Base:  http://localhost:${PORT}/api/v1`);
+    console.log(`Health:   http://localhost:${PORT}/api/health\n`);
+
+    await verifyCloudinaryConnection();
+    await verifyMailerConnection();
+    await seedSuperAdmin();
+    await seedDefaultSettings();
+    startCronJobs();
+  });
+}
+
+export default app;
