@@ -435,14 +435,13 @@ export default function Home() {
                 <p className="text-muted-foreground mt-1 text-sm">Copy-ready prompts for every AI tool</p>
               </div>
 
-              {/* Prompt feature cards */}
               <div className="space-y-3 flex-1">
                 {[
-                  { icon: Code2, label: 'Coding Prompts', count: '120+', color: 'text-blue-500', bg: 'bg-blue-500/10' },
-                  { icon: FileText, label: 'Writing Prompts', count: '200+', color: 'text-violet-500', bg: 'bg-violet-500/10' },
-                  { icon: TrendingUp, label: 'Marketing Prompts', count: '80+', color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
-                  { icon: Globe, label: 'SEO Prompts', count: '60+', color: 'text-amber-500', bg: 'bg-amber-500/10' },
-                ].map(({ icon: Icon, label, count, color, bg }) => (
+                  { icon: Code2, label: 'Coding Prompts', desc: 'Debug, refactor & ship faster', color: 'text-blue-500', bg: 'bg-blue-500/10' },
+                  { icon: FileText, label: 'Writing Prompts', desc: 'Drafts, edits & creative copy', color: 'text-violet-500', bg: 'bg-violet-500/10' },
+                  { icon: TrendingUp, label: 'Marketing Prompts', desc: 'Campaigns, hooks & ad copy', color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
+                  { icon: Globe, label: 'SEO Prompts', desc: 'Rankings, meta & content briefs', color: 'text-amber-500', bg: 'bg-amber-500/10' },
+                ].map(({ icon: Icon, label, desc, color, bg }) => (
                   <Link
                     key={label}
                     to={`/prompts?category=${encodeURIComponent(label.replace(' Prompts', ''))}`}
@@ -453,7 +452,7 @@ export default function Home() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold group-hover:text-primary transition-colors">{label}</p>
-                      <p className="text-xs text-muted-foreground">{count} prompts available</p>
+                      <p className="text-xs text-muted-foreground">{desc}</p>
                     </div>
                     <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
                   </Link>

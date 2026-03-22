@@ -7,7 +7,7 @@ import {
     Ban, Cpu, Info, Scale, Globe, MessageSquare,
 } from 'lucide-react'
 
-const LAST_UPDATED = '2024-01-15'
+const LAST_UPDATED = '2026-01-15'
 
 const SECTIONS = [
     {
@@ -240,15 +240,10 @@ export default function Terms() {
                             <Clock className="h-3.5 w-3.5" />
                             Last updated: {formatDate(LAST_UPDATED)}
                         </span>
-                        <span className="h-1 w-1 rounded-full bg-border" />
-                        <span className="flex items-center gap-1.5">
-                            <Scale className="h-3.5 w-3.5 text-primary" />
-                            Governed by Indian law · Ahmedabad jurisdiction
-                        </span>
                     </div>
                     <p className="text-muted-foreground mt-5 leading-relaxed max-w-2xl text-sm border-l-2 border-primary pl-4">
                         Please read these Terms carefully before using Stakepedia. By using our Service, you agree to be bound by these Terms. Questions? Email{' '}
-                        <a href="mailto:legal@stakepedia.com" className="text-primary hover:underline font-medium">legal@stakepedia.com</a>.
+                        <a href="mailto:jainishparmar63@gmail.com" className="text-primary hover:underline font-medium">jainishparmar63@gmail.com</a>.
                     </p>
                 </div>
 
@@ -284,10 +279,10 @@ export default function Terms() {
                             {/* Quick contact */}
                             <div className="mt-6 p-4 rounded-2xl border border-border bg-card">
                                 <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">Legal contact</p>
-                                <a href="mailto:legal@stakepedia.com"
+                                <a href="mailto:jainishparmar63@gmail.com"
                                     className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors">
                                     <Mail className="h-3.5 w-3.5 shrink-0" />
-                                    legal@stakepedia.com
+                                    jainishparmar63@gmail.com
                                 </a>
                                 <Link to="/contact"
                                     className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors mt-2">

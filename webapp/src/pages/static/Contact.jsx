@@ -39,37 +39,16 @@ const CONTACT_INFO = [
     {
         icon: Mail,
         title: 'Email us',
-        value: 'hello@stakepedia.com',
+        value: 'jainishparmar63@gmail.com',
         note: 'We reply within 24 hours on business days',
         color: 'bg-primary/10 text-primary',
-    },
-    {
-        icon: Clock,
-        title: 'Business hours',
-        value: 'Mon–Fri, 9am–6pm IST',
-        note: 'We do our best to reply on weekends too',
-        color: 'bg-amber-500/10 text-amber-600',
-    },
-    {
-        icon: MapPin,
-        title: 'Based in',
-        value: 'Ahmedabad, India',
-        note: 'Fully remote team',
-        color: 'bg-emerald-500/10 text-emerald-600',
-    },
+    }
 ]
 
 const SOCIAL = [
     { icon: Twitter, label: 'Twitter', href: '#', handle: '@stakepedia', hover: 'hover:bg-sky-500/10 hover:text-sky-500 hover:border-sky-500/30' },
     { icon: Github, label: 'GitHub', href: '#', handle: 'stakepedia', hover: 'hover:bg-foreground/10 hover:text-foreground hover:border-foreground/20' },
     { icon: Linkedin, label: 'LinkedIn', href: '#', handle: 'Stakepedia', hover: 'hover:bg-blue-500/10 hover:text-blue-500 hover:border-blue-500/30' },
-]
-
-const QUICK_LINKS = [
-    { label: 'Submit an AI tool', subject: 'tool-submission' },
-    { label: 'Write for the blog', subject: 'general' },
-    { label: 'Press & media kit', subject: 'partnership' },
-    { label: 'Report an error', subject: 'bug' },
 ]
 
 /* ── Component ────────────────────────────────────────────── */
@@ -286,27 +265,6 @@ export default function Contact() {
                                             <span className="font-medium">{handle}</span>
                                             <span className="text-xs ml-auto opacity-60">on {label}</span>
                                         </a>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Quick links */}
-                            <div className="rounded-2xl border border-border bg-card p-4">
-                                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">Quick actions</p>
-                                <div className="space-y-1">
-                                    {QUICK_LINKS.map(({ label, subject }) => (
-                                        <button
-                                            key={label}
-                                            type="button"
-                                            onClick={() => {
-                                                setValue('subject', subject, { shouldValidate: true })
-                                                window.scrollTo({ top: 0, behavior: 'smooth' })
-                                            }}
-                                            className="w-full flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-all group"
-                                        >
-                                            <span>{label}</span>
-                                            <ArrowRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
-                                        </button>
                                     ))}
                                 </div>
                             </div>

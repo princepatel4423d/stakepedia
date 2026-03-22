@@ -6,7 +6,7 @@ import {
     AlertCircle, Baby, RefreshCw, Share2,
 } from 'lucide-react'
 
-const LAST_UPDATED = '2024-01-15'
+const LAST_UPDATED = '2026-01-15'
 
 const SECTIONS = [
     {
@@ -233,7 +233,7 @@ export default function PrivacyPolicy() {
                     </div>
                     <p className="text-muted-foreground mt-5 leading-relaxed max-w-2xl text-sm border-l-2 border-primary pl-4">
                         Your privacy matters to us. This policy explains clearly what data we collect, why we collect it and how we protect it. Questions? Email us at{' '}
-                        <a href="mailto:privacy@stakepedia.com" className="text-primary hover:underline font-medium">privacy@stakepedia.com</a>.
+                        <a href="mailto:jainishparmar63@gmail.com" className="text-primary hover:underline font-medium">jainishparmar63@gmail.com</a>.
                     </p>
                 </div>
 
@@ -272,12 +272,7 @@ export default function PrivacyPolicy() {
                                 <a href="mailto:privacy@stakepedia.com"
                                     className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors">
                                     <Mail className="h-3.5 w-3.5 shrink-0" />
-                                    privacy@stakepedia.com
-                                </a>
-                                <a href="mailto:dpo@stakepedia.com"
-                                    className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors mt-2">
-                                    <Shield className="h-3.5 w-3.5 shrink-0" />
-                                    dpo@stakepedia.com (DPO)
+                                    jainishparmar63@gmail.com
                                 </a>
                             </div>
                         </div>

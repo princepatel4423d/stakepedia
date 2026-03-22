@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import {
     Bot, Users, Target, Sparkles, ArrowRight,
@@ -5,13 +6,11 @@ import {
     TrendingUp, Heart, Star,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-
-const STATS = [
-    { value: '500+', label: 'AI Tools listed', icon: Bot },
-    { value: '50+', label: 'Courses available', icon: BookOpen },
-    { value: '1,000+', label: 'Prompts in library', icon: Zap },
-    { value: '10K+', label: 'Active users', icon: Users },
-]
+import { aiToolsApi } from '@/api/aitools.api'
+import { coursesApi } from '@/api/courses.api'
+import { promptsApi } from '@/api/prompts.api'
+import { statsApi } from '@/api/stats.api'
+import { blogsApi } from '@/api/blogs.api'
 
 const VALUES = [
     {
@@ -40,37 +39,6 @@ const VALUES = [
     },
 ]
 
-const TEAM = [
-    {
-        name: 'Aryan Mehta',
-        role: 'Founder & CEO',
-        bio: 'Ex-Google engineer obsessed with making AI accessible to everyone. Started Stakepedia after spending 40 hours finding the right AI writing tool.',
-        avatar: 'AM',
-        bg: 'bg-primary text-primary-foreground',
-    },
-    {
-        name: 'Priya Sharma',
-        role: 'Head of Content',
-        bio: "Former tech journalist who's reviewed over 300 AI tools. Brings editorial rigour to every listing and course we publish.",
-        avatar: 'PS',
-        bg: 'bg-violet-500 text-white',
-    },
-    {
-        name: 'Rohan Kapoor',
-        role: 'Lead Developer',
-        bio: "Full-stack engineer who built Stakepedia's search and recommendation engine. Loves developer tools and prompt engineering.",
-        avatar: 'RK',
-        bg: 'bg-blue-500 text-white',
-    },
-    {
-        name: 'Sneha Patel',
-        role: 'Community Manager',
-        bio: 'Runs our Discord, curates user-submitted tools and makes sure every review gets a fair hearing. The glue that holds the community together.',
-        avatar: 'SP',
-        bg: 'bg-emerald-500 text-white',
-    },
-]
-
 const TIMELINE = [
     { year: '2023', event: 'Stakepedia founded with 50 hand-picked AI tools and a simple mission: help people navigate the AI explosion.' },
     { year: 'Q2 2023', event: 'Reached 500 registered users. Launched user reviews and ratings system after community requests.' },
@@ -80,6 +48,59 @@ const TIMELINE = [
 ]
 
 export default function About() {
+
+    const { data: toolsSummary } = useQuery({
+        queryKey: ['tools-summary-about'],
+        queryFn: () => aiToolsApi.getAll({ page: 1, limit: 1, status: 'published' }),
+        select: (res) => ({ total: res.data?.pagination?.total || 0 }),
+    })
+
+    const { data: coursesSummary } = useQuery({
+        queryKey: ['courses-summary-about'],
+        queryFn: () => coursesApi.getAll({ page: 1, limit: 1, status: 'published' }),
+        select: (res) => ({ total: res.data?.pagination?.total || 0 }),
+    })
+
+    const { data: promptsSummary } = useQuery({
+        queryKey: ['prompts-summary-about'],
+        queryFn: () => promptsApi.getAll({ page: 1, limit: 1, status: 'published' }),
+        select: (res) => ({ total: res.data?.pagination?.total || 0 }),
+    })
+
+    const { data: blogsSummary } = useQuery({
+        queryKey: ['blogs-summary-about'],
+        queryFn: () => blogsApi.getAll({ page: 1, limit: 1, status: 'published' }),
+        select: (res) => ({ total: res.data?.pagination?.total || 0 }),
+    })
+
+    const { data: publicStats } = useQuery({
+        queryKey: ['public-stats-about'],
+        queryFn: () => statsApi.getPublic(),
+        select: (res) => res.data?.data || null,
+    })
+
+    const formatCount = (num, fallback = '0') => {
+        const n = Number(num)
+        if (!Number.isFinite(n) || n <= 0) return fallback
+        if (n >= 1000000) return `${Math.floor(n / 100000) / 10}M+`
+        if (n >= 1000) return `${Math.floor(n / 100) / 10}K+`
+        return `${n}+`
+    }
+
+    const STATS = [
+        { value: formatCount(toolsSummary?.total, '500+'), label: 'AI Tools listed', icon: Bot },
+        { value: formatCount(coursesSummary?.total, '50+'), label: 'Courses available', icon: BookOpen },
+        { value: formatCount(promptsSummary?.total, '1,000+'), label: 'Prompts in library', icon: Zap },
+        { value: formatCount(publicStats?.users?.total, '10K+'), label: 'Active users', icon: Users },
+    ]
+
+    const RESOURCE_GRID = [
+        { icon: Bot, label: 'AI Tools', count: formatCount(toolsSummary?.total, '500+'), color: 'text-primary', bg: 'bg-primary/10', border: 'border-primary/20' },
+        { icon: BookOpen, label: 'Courses', count: formatCount(coursesSummary?.total, '50+'), color: 'text-violet-600', bg: 'bg-violet-500/10', border: 'border-violet-500/20' },
+        { icon: Zap, label: 'Prompts', count: formatCount(promptsSummary?.total, '1K+'), color: 'text-amber-600', bg: 'bg-amber-500/10', border: 'border-amber-500/20' },
+        { icon: FileText, label: 'Blog posts', count: formatCount(blogsSummary?.total, '200+'), color: 'text-emerald-600', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20' },
+    ]
+
     return (
         <div className="pt-6">
 
@@ -152,16 +173,11 @@ export default function About() {
                             </div>
                         </div>
 
-                        {/* Resource grid */}
+                        {/* Resource grid with real counts */}
                         <div className="grid grid-cols-2 gap-4">
-                            {[
-                                { icon: Bot, label: 'AI Tools', count: '500+', color: 'text-primary', bg: 'bg-primary/10', border: 'border-primary/20' },
-                                { icon: BookOpen, label: 'Courses', count: '50+', color: 'text-violet-600', bg: 'bg-violet-500/10', border: 'border-violet-500/20' },
-                                { icon: Zap, label: 'Prompts', count: '1K+', color: 'text-amber-600', bg: 'bg-amber-500/10', border: 'border-amber-500/20' },
-                                { icon: FileText, label: 'Blog posts', count: '200+', color: 'text-emerald-600', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20' },
-                            ].map(({ icon: Icon, label, count, color, bg, border }) => (
+                            {RESOURCE_GRID.map(({ icon: Icon, label, count, color, bg, border }) => (
                                 <div key={label} className={`p-6 rounded-2xl border ${border} ${bg} flex flex-col gap-4 hover:-translate-y-0.5 transition-transform`}>
-                                    <div className={`h-11 w-11 rounded-xl bg-background/60 flex items-center justify-center`}>
+                                    <div className="h-11 w-11 rounded-xl bg-background/60 flex items-center justify-center">
                                         <Icon className={`h-5 w-5 ${color}`} />
                                     </div>
                                     <div>
@@ -210,25 +226,18 @@ export default function About() {
 
                     <div className="max-w-3xl mx-auto">
                         <div className="relative">
-                            {/* Line */}
                             <div className="absolute left-22 top-3 bottom-3 w-px bg-linear-to-b from-primary/40 via-border to-transparent" />
-
                             <div className="space-y-6">
-                                {TIMELINE.map(({ year, event }, i) => (
+                                {TIMELINE.map(({ year, event }) => (
                                     <div key={year} className="flex gap-6 items-start group">
-                                        {/* Year badge */}
                                         <div className="w-19 shrink-0 flex justify-end pt-0.5">
                                             <span className="text-[11px] font-bold text-primary bg-primary/10 border border-primary/20 px-2 py-1 rounded-full whitespace-nowrap">
                                                 {year}
                                             </span>
                                         </div>
-
-                                        {/* Dot */}
                                         <div className="relative shrink-0 mt-2">
                                             <div className="h-3 w-3 rounded-full bg-primary border-2 border-background shadow-sm shadow-primary/30 group-hover:scale-125 transition-transform" />
                                         </div>
-
-                                        {/* Content */}
                                         <div className="flex-1 pb-2">
                                             <div className="p-4 rounded-xl border border-border bg-card hover:border-primary/30 transition-colors group-hover:shadow-sm">
                                                 <p className="text-sm text-muted-foreground leading-relaxed">{event}</p>
@@ -238,35 +247,6 @@ export default function About() {
                                 ))}
                             </div>
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* ══ TEAM ═══════════════════════════════════════════════ */}
-            <section className="py-14 bg-muted/20 border-y border-border">
-                <div className="max-w-7xl mx-auto px-4">
-                    <div className="text-center mb-14">
-                        <p className="text-xs font-bold uppercase tracking-widest text-primary/70 mb-3">People</p>
-                        <h2 className="text-4xl font-black mb-3 tracking-tight">Meet the team</h2>
-                        <p className="text-muted-foreground text-sm">The people behind Stakepedia.</p>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                        {TEAM.map(({ name, role, bio, avatar, bg }) => (
-                            <div key={name} className="group flex flex-col rounded-2xl border border-border bg-card overflow-hidden hover:border-primary/30 hover:shadow-lg transition-all">
-                                {/* Header band */}
-                                <div className="h-16 bg-linear-to-br from-primary/5 to-transparent relative">
-                                    <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 h-16 w-16 rounded-2xl ${bg} flex items-center justify-center text-base font-black shadow-lg border-4 border-background`}>
-                                        {avatar}
-                                    </div>
-                                </div>
-                                {/* Body */}
-                                <div className="flex flex-col items-center text-center px-5 pt-12 pb-6 flex-1">
-                                    <h3 className="font-bold text-sm group-hover:text-primary transition-colors">{name}</h3>
-                                    <p className="text-xs text-primary font-semibold mb-3 mt-0.5">{role}</p>
-                                    <p className="text-xs text-muted-foreground leading-relaxed">{bio}</p>
-                                </div>
-                            </div>
-                        ))}
                     </div>
                 </div>
             </section>
@@ -300,11 +280,17 @@ export default function About() {
                         </Link>
                     </div>
 
-                    {/* Social proof row */}
                     <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-primary-foreground/50 text-sm">
-                        <span className="flex items-center gap-1.5"><Users className="h-4 w-4" /> 10,000+ users</span>
-                        <span className="flex items-center gap-1.5"><Star className="h-4 w-4 text-amber-300 fill-amber-300" /> 4.9 / 5 rating</span>
-                        <span className="flex items-center gap-1.5"><TrendingUp className="h-4 w-4" /> Growing daily</span>
+                        <span className="flex items-center gap-1.5">
+                            <Users className="h-4 w-4" />
+                            {formatCount(publicStats?.users?.total, '10,000+')} users
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                            <Star className="h-4 w-4 text-amber-300 fill-amber-300" /> 4.9 / 5 rating
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                            <TrendingUp className="h-4 w-4" /> Growing daily
+                        </span>
                     </div>
                 </div>
             </section>

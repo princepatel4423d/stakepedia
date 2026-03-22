@@ -13,14 +13,6 @@ const FEATURES = [
   { icon: CheckCircle, text: 'Free to join, always' },
 ]
 
-const TESTIMONIAL = {
-  name: 'Sarah K.',
-  role: 'Product Designer',
-  avatar: 'S',
-  text: 'Stakepedia saved me hours of research. Found the perfect AI tools for my workflow in minutes.',
-  rating: 5,
-}
-
 export default function AuthLayout() {
   const { data: publicStats } = useQuery({
     queryKey: ['public-stats-auth-layout'],
@@ -114,27 +106,6 @@ export default function AuthLayout() {
                 <p className="text-[9px] text-background/45 leading-tight">{label}</p>
               </div>
             ))}
-          </div>
-
-          {/* Single testimonial */}
-          <div className="flex gap-3 p-3.5 rounded-2xl bg-background/8 border border-background/10">
-            <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold shrink-0">
-              {TESTIMONIAL.avatar}
-            </div>
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center justify-between mb-1">
-                <div>
-                  <span className="text-xs font-semibold text-background">{TESTIMONIAL.name}</span>
-                  <span className="text-[10px] text-background/40 ml-1.5">· {TESTIMONIAL.role}</span>
-                </div>
-                <div className="flex gap-0.5">
-                  {Array.from({ length: TESTIMONIAL.rating }).map((_, i) => (
-                    <Star key={i} className="h-2.5 w-2.5 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-              </div>
-              <p className="text-xs text-background/55 leading-relaxed">"{TESTIMONIAL.text}"</p>
-            </div>
           </div>
         </div>
 
