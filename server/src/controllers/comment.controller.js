@@ -3,7 +3,6 @@ import Blog from "../models/Blog.model.js";
 import { successResponse, errorResponse, paginatedResponse } from "../utils/apiResponse.js";
 import { getPagination, buildPaginationMeta } from "../utils/pagination.utils.js";
 import { createAuditLog } from "../middleware/audit.middleware.js";
-import { notifyAllAdmins } from "../services/notification.service.js";
 
 const getIP = (req) => req.ip || req.headers["x-forwarded-for"] || "unknown";
 
@@ -52,16 +51,6 @@ export const createComment = async (req, res) => {
 
     // Auto-approve for verified users, pending for unverified
     const isApproved = req.user.isEmailVerified;
-
-    if (!isApproved) {
-      notifyAllAdmins({
-        type: "new_comment",
-        title: "Comment pending approval",
-        message: `A comment on "${blog.title}" is awaiting approval.`,
-        link: "/moderation/comments",
-        meta: { blogId },
-      }).catch(() => { });
-    }
 
     const comment = await Comment.create({
       user: req.user._id,

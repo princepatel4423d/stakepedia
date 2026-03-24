@@ -9,7 +9,7 @@ import { createAuditLog } from "../middleware/audit.middleware.js";
 import { getDefaultTemplateVariables } from "../templates/defaultEmailTemplates.js";
 
 const getIP = (req) => req.ip || req.headers["x-forwarded-for"] || "unknown";
-const ADMIN_TEMPLATE_CATEGORIES = ["marketing", "notification"];
+const ADMIN_TEMPLATE_CATEGORIES = ["marketing"];
 
 const dedupeEmails = (emails = []) => [...new Set(emails.filter(Boolean).map((e) => e.trim().toLowerCase()))];
 
@@ -112,7 +112,7 @@ export const createTemplate = async (req, res) => {
     };
 
     if (!ADMIN_TEMPLATE_CATEGORIES.includes(payload.category)) {
-      return errorResponse(res, "Only marketing or notification templates can be managed from admin.", 400);
+      return errorResponse(res, "Only marketing templates can be managed from admin.", 400);
     }
 
     const tmpl = await EmailTemplate.create(payload);
@@ -141,7 +141,7 @@ export const updateTemplate = async (req, res) => {
     const { slug: _ignoredSlug, ...updateData } = req.body;
 
     if (updateData.category && !ADMIN_TEMPLATE_CATEGORIES.includes(updateData.category)) {
-      return errorResponse(res, "Only marketing or notification templates can be managed from admin.", 400);
+      return errorResponse(res, "Only marketing templates can be managed from admin.", 400);
     }
 
     const oldData = { name: tmpl.name, subject: tmpl.subject };
@@ -329,7 +329,7 @@ export const sendCampaign = async (req, res) => {
       const tmpl = await EmailTemplate.findOne({ _id: templateId, isSystem: { $ne: true } });
       if (!tmpl) return errorResponse(res, "Template not found.", 404);
       if (!ADMIN_TEMPLATE_CATEGORIES.includes(tmpl.category)) {
-        return errorResponse(res, "Only marketing or notification templates can be used in campaigns.", 400);
+        return errorResponse(res, "Only marketing templates can be used in campaigns.", 400);
       }
       templateSlug = tmpl.slug;
     }

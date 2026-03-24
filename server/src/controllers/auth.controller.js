@@ -5,7 +5,6 @@ import { successResponse, errorResponse } from "../utils/apiResponse.js";
 import {
   sendVerificationEmail, sendWelcomeEmail, sendPasswordResetEmail,
 } from "../services/email.service.js";
-import { notifyAllSuperAdmins } from "../services/notification.service.js";
 
 const isUserBanned = (user) => {
   if (!user || user.banStatus === "none") return false;
@@ -26,15 +25,6 @@ export const register = async (req, res) => {
       emailVerifyToken: hashToken(verifyOtp),
       emailVerifyExpires: Date.now() + 10 * 60 * 1000,
     });
-
-    // inside register(), after User.create():
-    notifyAllSuperAdmins({
-      type: "new_user",
-      title: "New user registered",
-      message: `${name} (${email}) just created an account.`,
-      link: `/admin/users`,
-      meta: { email },
-    }).catch(() => { }); // fire-and-forget
 
     await sendVerificationEmail({ name, email }, verifyOtp);
     return successResponse(res, "Registration successful. Please verify your email with the OTP sent to your email.", null, 201);

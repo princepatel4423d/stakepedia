@@ -67,12 +67,6 @@ export const requirePermission = (...perms) => (req, res, next) => {
     if (req.admin.permissions?.[perm] === true) return true;
 
     // Backward-compatible fallbacks for admins created before these keys existed.
-    if (perm === "manageNotifications") {
-      if (req.admin.permissions && Object.prototype.hasOwnProperty.call(req.admin.permissions, "manageNotifications")) {
-        return false;
-      }
-      return req.admin.permissions?.manageEmail === true;
-    }
     if (perm === "manageModeration") {
       return req.admin.permissions?.manageAITools === true || req.admin.permissions?.manageBlogs === true;
     }

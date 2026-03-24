@@ -23,7 +23,6 @@ const adminSchema = new mongoose.Schema(
       manageCourses:  { type: Boolean, default: true },
       managePrompts:  { type: Boolean, default: true },
       manageEmail:    { type: Boolean, default: true },
-      manageNotifications: { type: Boolean, default: true },
       manageModeration: { type: Boolean, default: true },
       manageAdmins:   { type: Boolean, default: false },
       manageSettings: { type: Boolean, default: false },

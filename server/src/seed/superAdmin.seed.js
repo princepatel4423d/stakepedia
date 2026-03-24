@@ -14,7 +14,7 @@ export const seedSuperAdmin = async () => {
       isActive: true,
       permissions: {
         manageUsers: true, manageAITools: true, manageBlogs: true,
-        manageCourses: true, managePrompts: true, manageEmail: true, manageNotifications: true,
+        manageCourses: true, managePrompts: true, manageEmail: true,
         manageModeration: true,
         manageAdmins: true, manageSettings: true, viewAnalytics: true, viewAuditLogs: true,
       },

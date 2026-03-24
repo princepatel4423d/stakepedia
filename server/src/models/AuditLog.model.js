@@ -25,8 +25,6 @@ const ACTIONS = [
   // Email
   "email.template.created", "email.template.updated", "email.template.deleted",
   "email.campaign.sent",
-  // Notifications
-  "notification.campaign.sent",
   // Settings
   "settings.updated",
   // Uploads
@@ -51,7 +49,7 @@ const auditLogSchema = new mongoose.Schema(
       enum: [
         "Admin", "User", "AITool", "Blog", "Course", "Lesson",
         "Prompt", "Category", "Review", "Comment",
-        "EmailTemplate", "EmailCampaign", "NotificationCampaign", "SiteSettings", "Upload",
+        "EmailTemplate", "EmailCampaign", "SiteSettings", "Upload",
       ],
     },
     resourceId:   { type: mongoose.Schema.Types.ObjectId, default: null },

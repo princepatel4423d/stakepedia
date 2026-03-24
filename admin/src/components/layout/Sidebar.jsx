@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import {
   LayoutDashboard, Bot, FileText, BookOpen, Zap,
   FolderOpen, Users, Shield, Mail, Flag,
-  Bell, Settings, BarChart3, ChevronLeft, ChevronRight,
+  Settings, BarChart3, ChevronLeft, ChevronRight,
 } from 'lucide-react'
 
 const NAV_ITEMS = [
@@ -23,7 +23,6 @@ const NAV_ITEMS = [
   { label: 'Moderation', href: '/moderation', icon: Flag, permission: 'manageModeration' },
   { type: 'separator', label: 'System' },
   { label: 'Email', href: '/email/templates', icon: Mail, permission: 'manageEmail' },
-  { label: 'Notifications', href: '/notifications/campaigns', icon: Bell, permission: 'manageNotifications' },
   { label: 'Audit Logs', href: '/audit', icon: BarChart3, permission: 'viewAuditLogs' },
   { label: 'Settings', href: '/settings', icon: Settings, permission: 'manageSettings' },
 ]

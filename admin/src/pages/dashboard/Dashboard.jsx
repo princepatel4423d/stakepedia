@@ -206,13 +206,6 @@ const Dashboard = () => {
               <span>Create blog post</span>
               <ArrowRight className="h-3.5 w-3.5 text-muted-foreground" />
             </button>
-            <button
-              onClick={() => navigate('/notifications/campaigns')}
-              className="w-full flex items-center justify-between rounded-lg border px-3 py-2 text-sm hover:bg-muted/50 transition-colors"
-            >
-              <span>Send notification</span>
-              <ArrowRight className="h-3.5 w-3.5 text-muted-foreground" />
-            </button>
           </CardContent>
         </Card>
 

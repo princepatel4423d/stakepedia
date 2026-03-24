@@ -35,7 +35,6 @@ const SiteSettings = () => {
             favicon: '',
             googleAnalyticsId: '',
             allowRegistrations: true,
-            emailNotifications: true,
             socialLinks: {
                 twitter: '',
                 github: '',
@@ -63,7 +62,6 @@ const SiteSettings = () => {
             favicon: settings.favicon || '',
             googleAnalyticsId: settings.googleAnalyticsId || '',
             allowRegistrations: settings.allowRegistrations ?? true,
-            emailNotifications: settings.emailNotifications ?? true,
             socialLinks: {
                 twitter: settings.socialLinks?.twitter || '',
                 github: settings.socialLinks?.github || '',
@@ -112,7 +110,6 @@ const SiteSettings = () => {
             favicon: data.favicon || null,
             googleAnalyticsId: data.googleAnalyticsId,
             allowRegistrations: data.allowRegistrations ?? true,
-            emailNotifications: data.emailNotifications ?? true,
             socialLinks: {
                 twitter: data.socialLinks?.twitter || null,
                 github: data.socialLinks?.github || null,
@@ -231,16 +228,6 @@ const SiteSettings = () => {
                                         <Switch
                                             checked={watch('allowRegistrations')}
                                             onCheckedChange={(v) => setValue('allowRegistrations', v)}
-                                        />
-                                    </div>
-                                    <div className="flex items-center justify-between p-2.5 rounded-lg bg-muted/50">
-                                        <div>
-                                            <p className="text-sm font-medium">Email notifications</p>
-                                            <p className="text-xs text-muted-foreground">Send transactional emails to users</p>
-                                        </div>
-                                        <Switch
-                                            checked={watch('emailNotifications')}
-                                            onCheckedChange={(v) => setValue('emailNotifications', v)}
                                         />
                                     </div>
                                 </CardContent>

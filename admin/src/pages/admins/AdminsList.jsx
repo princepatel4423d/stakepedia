@@ -38,7 +38,6 @@ const PERMISSIONS = [
     { key: 'manageCourses', label: 'Manage courses' },
     { key: 'managePrompts', label: 'Manage prompts' },
     { key: 'manageEmail', label: 'Manage email' },
-    { key: 'manageNotifications', label: 'Manage notifications' },
     { key: 'manageModeration', label: 'Manage moderation' },
     { key: 'manageAdmins', label: 'Manage admins' },
     { key: 'manageSettings', label: 'Manage settings' },

@@ -26,7 +26,6 @@ const siteSettingsSchema = new mongoose.Schema(
     },
     maintenanceMode:     { type: Boolean, default: false },
     allowRegistrations:  { type: Boolean, default: true },
-    emailNotifications:  { type: Boolean, default: true },
     googleAnalyticsId:   { type: String, default: null },
     customHeaderScripts: { type: String, default: null },
     customFooterScripts: { type: String, default: null },

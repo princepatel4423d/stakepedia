@@ -6,7 +6,6 @@ import Prompt from "../models/Prompt.model.js";
 import { successResponse, errorResponse, paginatedResponse } from "../utils/apiResponse.js";
 import { getPagination, buildPaginationMeta } from "../utils/pagination.utils.js";
 import { createAuditLog } from "../middleware/audit.middleware.js";
-import { notifyAllAdmins } from "../services/notification.service.js";
 
 const getIP = (req) => req.ip || req.headers["x-forwarded-for"] || "unknown";
 
@@ -92,14 +91,6 @@ export const createReview = async (req, res) => {
       isApproved: false,
     });
     await review.populate("user", "name avatar");
-
-    notifyAllAdmins({
-      type: "new_review",
-      title: "New review submitted",
-      message: `A new ${targetType} review is waiting for approval.`,
-      link: "/moderation/reviews",
-      meta: { targetType, targetId },
-    }).catch(() => { });
 
     return successResponse(res, "Review submitted and awaiting moderation.", review, 201);
   } catch (err) {

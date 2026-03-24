@@ -2,7 +2,6 @@ import Handlebars from "handlebars";
 import { transporter } from "../config/mailer.config.js";
 import EmailTemplate from "../models/EmailTemplate.model.js";
 import EmailLog from "../models/EmailLog.model.js";
-import { notifyAllSuperAdmins } from "./notification.service.js";
 import { getDefaultEmailTemplate, getDefaultTemplateVariables } from "../templates/defaultEmailTemplates.js";
 
 const normalizeMalformedUrlPlaceholders = (input = "") => {
@@ -49,15 +48,6 @@ export const sendEmail = async ({ to, subject, html, template, variables = {}, s
     await log.save();
     return { success: true };
   } catch (error) {
-
-    notifyAllSuperAdmins({
-      type: "failed_email",
-      title: "Email delivery failed",
-      message: `Failed to send email to ${to}: ${error.message}`,
-      link: `/admin/email/logs`,
-      meta: { to, template, error: error.message },
-    }).catch(() => { });
-
     log.status = "failed";
     log.error = error.message;
     await log.save();

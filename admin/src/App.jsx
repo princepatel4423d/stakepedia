@@ -51,7 +51,6 @@ import ModerationQueue from '@/pages/moderation/ModerationQueue'
 import EmailTemplates from '@/pages/email/EmailTemplates'
 import EmailCampaigns from '@/pages/email/EmailCampaigns'
 import EmailLogs from '@/pages/email/EmailLogs'
-import NotificationCampaigns from '@/pages/notifications/NotificationCampaigns'
 
 // Audit
 import AuditLogs from '@/pages/audit/AuditLogs'
@@ -133,10 +132,6 @@ export default function App() {
             <Route path="/email/templates" element={<EmailTemplates />} />
             <Route path="/email/campaigns" element={<EmailCampaigns />} />
             <Route path="/email/logs" element={<EmailLogs />} />
-          </Route>
-
-          <Route element={<PermissionRoute permission="manageNotifications" />}>
-            <Route path="/notifications/campaigns" element={<NotificationCampaigns />} />
           </Route>
 
           {/* Audit Logs - viewAuditLogs permission required */}

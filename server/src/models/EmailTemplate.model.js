@@ -11,7 +11,7 @@ const emailTemplateSchema = new mongoose.Schema(
     variables: [{ name: String, description: String, defaultValue: String }],
     category: {
       type:    String,
-      enum:    ["transactional", "marketing", "notification"],
+      enum:    ["transactional", "marketing"],
       default: "transactional",
     },
     isSystem:  { type: Boolean, default: false },

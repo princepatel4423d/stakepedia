@@ -28,7 +28,6 @@ import adminSettingsRoutes from "./routes/adminSettings.routes.js";
 import adminAuditRoutes from "./routes/adminAudit.routes.js";
 import adminCategoryRoutes from "./routes/adminCategory.routes.js";
 import adminCommentRoutes from "./routes/comment.routes.js";
-import adminNotificationRoutes from "./routes/adminNotification.routes.js";
 import analyticsRoutes from "./routes/analytics.routes.js";
 import aiToolRoutes from "./routes/aiTool.routes.js";
 import blogRoutes from "./routes/blog.routes.js";
@@ -94,7 +93,6 @@ app.use("/api/v1/admin/settings", adminSettingsRoutes);
 app.use("/api/v1/admin/audit", adminAuditRoutes);
 app.use("/api/v1/admin/categories", adminCategoryRoutes);
 app.use("/api/v1/admin/comments", adminCommentRoutes);
-app.use("/api/v1/admin/notifications", adminNotificationRoutes);
 app.use("/api/v1/admin/analytics", analyticsRoutes);
 app.use("/api/v1/admin", adminRoutes);
 
