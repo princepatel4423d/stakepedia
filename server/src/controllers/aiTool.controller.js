@@ -30,14 +30,13 @@ export const getAITools = async (req, res) => {
     const { search, category, tag, pricing, sort = "-createdAt" } = req.query;
     const query = { status: "published" };
     if (search) query.$text = { $search: search };
-    if (category) query.$or = [{ category }, { categories: category }];
+    if (category) query.category = category;
     if (tag) query.tags = { $in: [new RegExp(`^${escapeRegExp(tag)}$`, "i")] };
     if (pricing) query.pricing = pricing;
 
     const [tools, total] = await Promise.all([
       AITool.find(query)
         .populate("category", "name slug color")
-        .populate("categories", "name slug color")
         .sort(sort)
         .skip(skip)
         .limit(limit),
@@ -57,7 +56,6 @@ export const getAIToolBySlug = async (req, res) => {
 
     const tool = await AITool.findOne({ slug: req.params.slug, status: "published" })
       .populate("category", "name slug color")
-      .populate("categories", "name slug color")
       .populate("prompts", "title slug description content tags usageCount likeCount createdAt status");
     if (!tool) return errorResponse(res, "AI tool not found.", 404);
 

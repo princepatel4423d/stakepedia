@@ -161,27 +161,21 @@ const AIToolsList = () => {
             key: 'category',
             label: 'Category',
             render: (row) => {
-                const categories = Array.isArray(row.categories) && row.categories.length
-                    ? row.categories
-                    : (row.category ? [row.category] : [])
-                if (!categories.length) return '—'
+                const category = row.category
+                if (!category) return '—'
 
                 return (
-                    <div className="flex flex-wrap gap-1.5">
-                        {categories.map((category) => (
-                            <Badge
-                                key={category._id || category.name}
-                                variant="outline"
-                                style={{
-                                    borderColor: (category.color || '#6366f1') + '40',
-                                    color: category.color || '#6366f1',
-                                }}
-                                className="text-xs font-medium"
-                            >
-                                {category.name || 'Category'}
-                            </Badge>
-                        ))}
-                    </div>
+                    <Badge
+                        key={category._id || category.name}
+                        variant="outline"
+                        style={{
+                            borderColor: (category.color || '#6366f1') + '40',
+                            color: category.color || '#6366f1',
+                        }}
+                        className="text-xs font-medium"
+                    >
+                        {category.name || 'Category'}
+                    </Badge>
                 )
             },
         },

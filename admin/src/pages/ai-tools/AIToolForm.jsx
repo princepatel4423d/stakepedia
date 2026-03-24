@@ -379,7 +379,7 @@ const AIToolForm = () => {
   const [logo, setLogo] = useState(null)
   const [coverImage, setCoverImage] = useState(null)
   const [screenshots, setScreenshots] = useState([])
-  const [selectedCategories, setSelectedCategories] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState(null)
   const [selectedTags, setSelectedTags] = useState([])
   const [features, setFeatures] = useState([])
   const [useCases, setUseCases] = useState([])
@@ -484,12 +484,10 @@ const AIToolForm = () => {
     setLogo(toolData.logo || null)
     setCoverImage(toolData.coverImage || null)
     setScreenshots(toolData.screenshots || [])
-    const categoryItems = toolData.categories?.length
-      ? toolData.categories.filter((item) => item && typeof item === 'object' && item.name)
-      : (toolData.category && typeof toolData.category === 'object' && toolData.category.name
-        ? [toolData.category]
-        : [])
-    setSelectedCategories(categoryItems)
+    const categoryItem = toolData.category && typeof toolData.category === 'object' && toolData.category.name
+      ? toolData.category
+      : null
+    setSelectedCategory(categoryItem)
     setSelectedTags(normalizeManualValues(toolData.tags || []))
     setFeatures(toolData.features || [])
     setUseCases(toolData.useCases || [])
@@ -542,8 +540,8 @@ const AIToolForm = () => {
   })
 
   const onSubmit = (data) => {
-    if (!selectedCategories.length) {
-      toast.error('Select at least one category')
+    if (!selectedCategory) {
+      toast.error('Select a category')
       return
     }
     if (!features.length) {
@@ -564,7 +562,7 @@ const AIToolForm = () => {
       description: data.description,
       shortDescription: data.shortDescription || undefined,
       url: data.url,
-      categories: selectedCategories.map((c) => c._id || c),
+      category: selectedCategory._id || selectedCategory,
       pricing: data.pricing,
       pricingDetails: data.pricingDetails || undefined,
       companyName: data.companyName || undefined,
@@ -713,52 +711,46 @@ const AIToolForm = () => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label>Categories *</Label>
+                        <Label>Category *</Label>
                         <Controller
-                          name="categoriesUi"
+                          name="categoryUi"
                           control={control}
                           render={() => (
                             <Select
-                              value=""
+                              value={selectedCategory?._id || ''}
                               onValueChange={(value) => {
                                 if (!value) return
                                 const selectedCategory = categories.find((c) => c._id === value)
                                 if (!selectedCategory) return
-                                if (!selectedCategories.some((c) => c._id === selectedCategory._id)) {
-                                  setSelectedCategories([...selectedCategories, selectedCategory])
-                                }
+                                setSelectedCategory(selectedCategory)
                               }}
                             >
                               <SelectTrigger>
-                                <SelectValue placeholder={categories.length === 0 ? 'No categories found' : 'Select categories...'} />
+                                <SelectValue placeholder={categories.length === 0 ? 'No categories found' : 'Select a category...'} />
                               </SelectTrigger>
                               <SelectContent>
-                                {categories
-                                  .filter((c) => !selectedCategories.some((selected) => selected._id === c._id))
-                                  .map((c) => (
-                                    <SelectItem key={c._id} value={c._id}>{c.name}</SelectItem>
-                                  ))}
+                                {categories.map((c) => (
+                                  <SelectItem key={c._id} value={c._id}>{c.name}</SelectItem>
+                                ))}
                               </SelectContent>
                             </Select>
                           )}
                         />
-                        {selectedCategories.length > 0 && (
+                        {selectedCategory && (
                           <div className="flex flex-wrap gap-2">
-                            {selectedCategories.map((category) => (
-                              <div
-                                key={category._id}
-                                className="flex items-center gap-1.5 bg-muted text-muted-foreground text-xs px-2.5 py-1.5 rounded-md"
+                            <div
+                              key={selectedCategory._id}
+                              className="flex items-center gap-1.5 bg-muted text-muted-foreground text-xs px-2.5 py-1.5 rounded-md"
+                            >
+                              <span>{selectedCategory.name}</span>
+                              <button
+                                type="button"
+                                onClick={() => setSelectedCategory(null)}
+                                className="hover:text-destructive transition-colors"
                               >
-                                <span>{category.name}</span>
-                                <button
-                                  type="button"
-                                  onClick={() => setSelectedCategories(selectedCategories.filter((c) => c._id !== category._id))}
-                                  className="hover:text-destructive transition-colors"
-                                >
-                                  <X className="h-3 w-3" />
-                                </button>
-                              </div>
-                            ))}
+                                <X className="h-3 w-3" />
+                              </button>
+                            </div>
                           </div>
                         )}
                         {categories.length === 0 && (

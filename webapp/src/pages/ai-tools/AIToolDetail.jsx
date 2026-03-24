@@ -565,22 +565,6 @@ export default function AIToolDetail() {
             </div>
           )}
 
-          {/* Categories */}
-          {tool.categories?.length > 0 && (
-            <div className="rounded-2xl border border-border bg-card p-5 space-y-3">
-              <h3 className="font-semibold text-sm">Categories</h3>
-              <div className="flex flex-wrap gap-2">
-                {tool.categories.map((cat) => (
-                  <Link key={cat._id} to={`/ai-tools?category=${cat._id}`}
-                    className="px-2.5 py-1 rounded-lg text-xs border border-border hover:border-primary/30 hover:bg-accent transition-all font-medium"
-                    style={{ color: cat.color }}>
-                    {cat.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-
           {/* Prompts linked */}
           {tool.prompts?.length > 0 && (
             <div className="rounded-2xl border border-border bg-card p-5 space-y-3">
