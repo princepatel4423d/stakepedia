@@ -58,10 +58,16 @@ export const globalSearch = async (req, res) => {
           model: AITool,
           query,
           textFields: ["name", "description", "shortDescription"],
-          select: "name slug logo shortDescription pricing averageRating category viewCount",
-          populate: { path: "category", select: "name slug color" },
+          select: "name slug logo shortDescription pricing averageRating categories viewCount",
+          populate: { path: "categories", select: "name slug color" },
           limit,
-        }).then((r) => ({ type: "AITool", results: r }))
+        }).then((r) => ({
+          type: "AITool",
+          results: r.map((item) => ({
+            ...item,
+            category: item.categories?.[0] || null,
+          })),
+        }))
       );
 
     if (!normalizedType || normalizedType === "blogs" || normalizedType === "blog")

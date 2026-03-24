@@ -4,7 +4,8 @@ export const createAIToolValidator = [
   body("name").trim().notEmpty().withMessage("Name is required").isLength({ max: 100 }),
   body("description").trim().notEmpty().withMessage("Description is required"),
   body("url").isURL().withMessage("Valid URL is required"),
-  body("category").isMongoId().withMessage("Valid category ID is required"),
+  body("categories").isArray({ min: 1 }).withMessage("At least one category is required"),
+  body("categories.*").isMongoId().withMessage("Each category must be a valid ID"),
   body("pricing")
     .optional()
     .isIn(["free", "freemium", "paid", "open-source", "contact"])
@@ -50,7 +51,8 @@ export const createAIToolValidator = [
 export const updateAIToolValidator = [
   body("name").optional().trim().notEmpty().isLength({ max: 100 }),
   body("url").optional().isURL().withMessage("Valid URL is required"),
-  body("category").optional().isMongoId().withMessage("Valid category ID is required"),
+  body("categories").optional().isArray().withMessage("Categories must be an array"),
+  body("categories.*").optional().isMongoId().withMessage("Each category must be a valid ID"),
   body("pricing")
     .optional()
     .isIn(["free", "freemium", "paid", "open-source", "contact"]),

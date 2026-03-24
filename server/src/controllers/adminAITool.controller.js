@@ -8,10 +8,11 @@ import { createAuditLog } from "../middleware/audit.middleware.js";
 
 const getIP = (req) => req.ip || req.headers["x-forwarded-for"] || "unknown";
 
-const normalizeCategoryId = (payload) => {
-  if (payload?.category) return String(payload.category);
-  if (Array.isArray(payload?.categories) && payload.categories.length) return String(payload.categories[0]);
-  return null;
+const normalizeCategoryIds = (payload) => {
+  const raw = Array.isArray(payload?.categories) && payload.categories.length
+    ? payload.categories
+    : (payload?.category ? [payload.category] : []);
+  return [...new Set(raw.map((id) => String(id)).filter(Boolean))];
 };
 
 const escapeRegExp = (value = "") => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -34,14 +35,14 @@ export const getAllAITools = async (req, res) => {
     const query = {};
     if (search)     query.$text = { $search: search };
     if (status)     query.status = status;
-    if (category)   query.category = category;
+    if (category)   query.categories = category;
     if (isFeatured) query.isFeatured = isFeatured === "true";
     if (pricing)    query["pricing"] = pricing;
     if (req.query.tag) query.tags = { $in: [new RegExp(`^${escapeRegExp(req.query.tag)}$`, "i")] };
 
     const [tools, total] = await Promise.all([
       AITool.find(query)
-        .populate("category", "name slug color")
+        .populate("categories", "name slug color")
         .populate("prompts", "title slug status")
         .populate("addedBy", "name email")
         .sort("-createdAt").skip(skip).limit(limit),
@@ -57,7 +58,7 @@ export const getAllAITools = async (req, res) => {
 export const getAIToolById = async (req, res) => {
   try {
     const tool = await AITool.findById(req.params.id)
-      .populate("category", "name slug color")
+      .populate("categories", "name slug color")
       .populate("prompts", "title slug status")
       .populate("addedBy", "name email");
     if (!tool) return errorResponse(res, "AI tool not found.", 404);
@@ -69,14 +70,14 @@ export const getAIToolById = async (req, res) => {
 
 export const createAITool = async (req, res) => {
   try {
-    const normalizedCategory = normalizeCategoryId(req.body);
+    const normalizedCategories = normalizeCategoryIds(req.body);
     const normalizedTags = normalizeStringArray(req.body.tags || []);
-    if (!normalizedCategory) return errorResponse(res, "Category is required.", 400);
+    if (!normalizedCategories.length) return errorResponse(res, "At least one category is required.", 400);
 
     const slug = await generateUniqueSlug(req.body.name, AITool);
     const tool = await AITool.create({
       ...req.body,
-      category: normalizedCategory,
+      categories: normalizedCategories,
       tags: normalizedTags,
       slug,
       addedBy: req.admin._id,
@@ -89,8 +90,7 @@ export const createAITool = async (req, res) => {
       );
     }
 
-    // Update category tool count
-  await Category.updateOne({ _id: normalizedCategory }, { $inc: { toolCount: 1 } });
+    await Category.updateMany({ _id: { $in: normalizedCategories } }, { $inc: { toolCount: 1 } });
 
     await createAuditLog({
       adminId: req.admin._id, action: "aitool.created", resource: "AITool",
@@ -114,22 +114,28 @@ export const updateAITool = async (req, res) => {
     if (req.body.name && req.body.name !== tool.name)
       req.body.slug = await generateUniqueSlug(req.body.name, AITool, tool._id);
 
-    // Sync category toolCount when category changes
+    // Sync category toolCount when categories change
     if (req.body.categories || req.body.category) {
-      const oldCategory = String(tool.category);
-      const newCategory = normalizeCategoryId(req.body);
+      const oldCategories = (tool.categories || []).map((id) => String(id));
+      const newCategories = normalizeCategoryIds(req.body);
 
-      if (!newCategory) {
-        return errorResponse(res, "Category is required.", 400);
+      if (!newCategories.length) {
+        return errorResponse(res, "At least one category is required.", 400);
       }
 
-      if (oldCategory !== newCategory) {
-        await Category.updateOne({ _id: oldCategory }, { $inc: { toolCount: -1 } });
-        await Category.updateOne({ _id: newCategory }, { $inc: { toolCount: 1 } });
+      const removed = oldCategories.filter((id) => !newCategories.includes(id));
+      const added = newCategories.filter((id) => !oldCategories.includes(id));
+
+      if (removed.length) {
+        await Category.updateMany({ _id: { $in: removed } }, { $inc: { toolCount: -1 } });
+      }
+      if (added.length) {
+        await Category.updateMany({ _id: { $in: added } }, { $inc: { toolCount: 1 } });
       }
 
-      req.body.category = newCategory;
-      delete req.body.categories;
+      req.body.categories = newCategories;
+
+      delete req.body.category;
     }
 
     if (req.body.prompts) {
@@ -178,8 +184,8 @@ export const deleteAITool = async (req, res) => {
     const tool = await AITool.findById(req.params.id);
     if (!tool) return errorResponse(res, "AI tool not found.", 404);
 
-    if (tool.category) {
-      await Category.updateOne({ _id: tool.category }, { $inc: { toolCount: -1 } });
+    if (tool.categories?.length) {
+      await Category.updateMany({ _id: { $in: tool.categories } }, { $inc: { toolCount: -1 } });
     }
     await Prompt.updateMany({ tool: tool._id }, { $set: { tool: null } });
     await tool.deleteOne();

@@ -30,20 +30,25 @@ export const getAITools = async (req, res) => {
     const { search, category, tag, pricing, sort = "-createdAt" } = req.query;
     const query = { status: "published" };
     if (search) query.$text = { $search: search };
-    if (category) query.category = category;
+    if (category) query.categories = category;
     if (tag) query.tags = { $in: [new RegExp(`^${escapeRegExp(tag)}$`, "i")] };
     if (pricing) query.pricing = pricing;
 
     const [tools, total] = await Promise.all([
       AITool.find(query)
-        .populate("category", "name slug color")
+        .populate("categories", "name slug color")
         .sort(sort)
         .skip(skip)
         .limit(limit),
       AITool.countDocuments(query),
     ]);
+    const normalizedTools = tools.map((tool) => {
+      const data = tool.toObject();
+      data.category = data.categories?.[0] || null;
+      return data;
+    });
 
-    return paginatedResponse(res, "AI tools fetched.", tools, buildPaginationMeta(total, page, limit));
+    return paginatedResponse(res, "AI tools fetched.", normalizedTools, buildPaginationMeta(total, page, limit));
   } catch (err) {
     return errorResponse(res, err.message, 500);
   }
@@ -55,7 +60,7 @@ export const getAIToolBySlug = async (req, res) => {
     const promptLimit = Math.min(Math.max(Number(req.query.promptLimit || 8), 1), 24);
 
     const tool = await AITool.findOne({ slug: req.params.slug, status: "published" })
-      .populate("category", "name slug color")
+      .populate("categories", "name slug color")
       .populate("prompts", "title slug description content tags usageCount likeCount createdAt status");
     if (!tool) return errorResponse(res, "AI tool not found.", 404);
 
@@ -76,6 +81,7 @@ export const getAIToolBySlug = async (req, res) => {
     ]);
 
     const data = tool.toObject();
+    data.category = data.categories?.[0] || null;
     data.tutorials = (data.tutorials || []).map((tutorial) => ({
       ...tutorial,
       youtubeEmbedUrl: toYoutubeEmbedUrl(tutorial.youtubeUrl),

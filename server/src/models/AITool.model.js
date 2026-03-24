@@ -42,7 +42,7 @@ const aiToolSchema = new mongoose.Schema(
     logo:             { type: String, default: null },
     coverImage:       { type: String, default: null },
     screenshots:      [{ type: String }],
-    category:         { type: mongoose.Schema.Types.ObjectId, ref: "Category", required: true },
+    categories:       [{ type: mongoose.Schema.Types.ObjectId, ref: "Category", required: true }],
     tags:             [{ type: String, trim: true }],
     pricing: {
       type:    String,
@@ -107,7 +107,7 @@ const aiToolSchema = new mongoose.Schema(
 );
 
 aiToolSchema.index({ name: "text", description: "text", shortDescription: "text" });
-aiToolSchema.index({ category: 1, status: 1 });
+aiToolSchema.index({ categories: 1, status: 1 });
 aiToolSchema.index({ isFeatured: 1, status: 1 });
 
 export default mongoose.model("AITool", aiToolSchema);
