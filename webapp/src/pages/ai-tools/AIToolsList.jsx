@@ -40,15 +40,21 @@ function ToolCard({ tool }) {
     >
       {/* Featured ribbon */}
       {tool.isFeatured && (
-        <div className="absolute top-3 right-3 z-10">
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-400/20 border border-amber-400/30 text-amber-600 text-[10px] font-semibold uppercase tracking-wide">
+        <div className="absolute top-3 right-3 z-20">
+          <span
+            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-400/80 border border-amber-400/80 text-amber-900 text-[10px] font-bold uppercase tracking-wide shadow-sm backdrop-blur-sm"
+            style={{
+              boxShadow: '0 2px 8px 0 rgba(0,0,0,0.06)',
+              letterSpacing: '0.06em',
+            }}
+          >
             <Sparkles className="h-2.5 w-2.5" /> Featured
           </span>
         </div>
       )}
 
       {/* Cover image or gradient banner */}
-      <div className="relative h-28 w-full overflow-hidden bg-linear-to-br from-primary/5 via-primary/3 to-transparent border-b border-border/40">
+      <div className="relative h-28 w-full bg-linear-to-br from-primary/5 via-primary/3 to-transparent border-b border-border/40">
         {tool.coverImage ? (
           <img src={tool.coverImage} alt="" className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-300" referrerPolicy="no-referrer" />
         ) : (
