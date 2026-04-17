@@ -12,11 +12,11 @@ import {
   Select, SelectContent, SelectItem,
   SelectTrigger, SelectValue,
 } from '@/components/ui/select'
-import PricingBadge from '@/components/shared/PricingBadge'
-import StarRating from '@/components/shared/StarRating'
-import Pagination from '@/components/shared/Pagination'
-import EmptyState from '@/components/shared/EmptyState'
-import { SubmitToolBanner, NewsletterBanner } from '@/components/shared/Banners'
+import PricingBadge from '@/components/common/PricingBadge'
+import StarRating from '@/components/common/StarRating'
+import Pagination from '@/components/common/Pagination'
+import EmptyState from '@/components/common/EmptyState'
+import { SubmitToolBanner, NewsletterBanner } from '@/components/common/Banners'
 import { aiToolsApi } from '@/api/aitools.api'
 import { categoriesApi } from '@/api/categories.api'
 
@@ -179,7 +179,7 @@ export default function AIToolsList() {
   const items = data?.items || []
   const activeFilterCount = [search, category, pricing, apiAvailable, featured].filter(Boolean).length + (sort !== 'newest' ? 1 : 0)
 
-  /* ── Split items at midpoint for banner injection ── */
+  /* Split items at midpoint for banner injection */
   const mid = Math.ceil(items.length / 2)
   const firstHalf = items.slice(0, mid)
   const secondHalf = items.slice(mid)
@@ -304,7 +304,7 @@ export default function AIToolsList() {
             <ToolCard key={tool._id} tool={tool} />
           ))}
 
-          {/* ── Mid-list banners ── */}
+          {/* Mid-list banners */}
           <SubmitToolBanner />
           <NewsletterBanner />
 

@@ -10,9 +10,9 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import StarRating from '@/components/shared/StarRating'
-import ReviewForm from '@/components/shared/ReviewForm'
-import EmptyState from '@/components/shared/EmptyState'
+import StarRating from '@/components/common/StarRating'
+import ReviewForm from '@/components/common/ReviewForm'
+import EmptyState from '@/components/common/EmptyState'
 import { coursesApi } from '@/api/courses.api'
 import { reviewsApi } from '@/api/reviews.api'
 import { useAuthStore } from '@/store/authStore'
@@ -98,7 +98,7 @@ export default function CourseDetail() {
 
       <div className="flex flex-col lg:flex-row gap-8">
 
-        {/* ══ LEFT — Main content ══════════════════════════════ */}
+        {/* LEFT - Main content */}
         <div className="flex-1 min-w-0 space-y-8">
 
           {/* Hero */}
@@ -175,7 +175,7 @@ export default function CourseDetail() {
               </TabsTrigger>
             </TabsList>
 
-            {/* ── Curriculum ── */}
+            {/* Curriculum */}
             <TabsContent value="curriculum" className="space-y-2">
               {lessons.length === 0 ? (
                 <div className="p-8 rounded-xl border border-border bg-muted/20 text-center">
@@ -257,7 +257,7 @@ export default function CourseDetail() {
           </Tabs>
         </div>
 
-        {/* ══ RIGHT — Sticky sidebar ═══════════════════════════ */}
+        {/* RIGHT - Sticky sidebar */}
         <aside className="w-full lg:w-72 xl:w-80 shrink-0">
           <div className="lg:sticky lg:top-24 space-y-4">
 

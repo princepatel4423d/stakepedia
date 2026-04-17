@@ -6,8 +6,8 @@ import {
   ArrowRight, Sparkles, Clock, Eye, Star,
 } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
-import EmptyState from '@/components/shared/EmptyState'
-import PricingBadge from '@/components/shared/PricingBadge'
+import EmptyState from '@/components/common/EmptyState'
+import PricingBadge from '@/components/common/PricingBadge'
 import { searchApi } from '@/api/search.api'
 
 const TYPE_META = {
@@ -32,7 +32,7 @@ const QUICK_LINKS = [
   { label: 'Top Prompts', href: '/prompts?featured=true', icon: Zap },
 ]
 
-/* ── Result card ──────────────────────────────────────────── */
+/* Result card */
 function ResultCard({ item }) {
   const meta = TYPE_META[item.type] || TYPE_META.AITool
   const Icon = meta.icon
@@ -104,7 +104,7 @@ function ResultCardSkeleton() {
   )
 }
 
-/* ── Main ─────────────────────────────────────────────────── */
+/* Main */
 export default function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [input, setInput] = useState(searchParams.get('q') || '')
@@ -151,7 +151,7 @@ export default function SearchPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
 
-      {/* ── Header ── */}
+      {/* Header */}
       <div className="mb-10">
         <h1 className="text-4xl sm:text-5xl font-black tracking-tight mb-6">
           {query ? (
@@ -199,7 +199,7 @@ export default function SearchPage() {
         )}
       </div>
 
-      {/* ── Empty state — no query ── */}
+      {/* Empty state - no query */}
       {!query && (
         <div className="flex flex-col lg:flex-row gap-10 items-start">
           {/* Empty prompt */}
@@ -232,14 +232,14 @@ export default function SearchPage() {
         </div>
       )}
 
-      {/* ── Loading ── */}
+      {/* Loading */}
       {query && isLoading && (
         <div className="space-y-3">
           {Array.from({ length: 6 }).map((_, i) => <ResultCardSkeleton key={i} />)}
         </div>
       )}
 
-      {/* ── No results ── */}
+      {/* No results */}
       {query && !isLoading && totalCount === 0 && (
         <div className="text-center py-16">
           <div className="h-20 w-20 rounded-3xl bg-muted flex items-center justify-center mx-auto mb-5">
@@ -261,7 +261,7 @@ export default function SearchPage() {
         </div>
       )}
 
-      {/* ── Results grouped by type ── */}
+      {/* Results grouped by type */}
       {totalCount > 0 && (
         <div className="space-y-10">
           {Object.entries(grouped).filter(([, items]) => items.length > 0).map(([type, items]) => {

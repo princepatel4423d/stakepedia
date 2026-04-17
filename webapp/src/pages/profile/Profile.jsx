@@ -13,14 +13,14 @@ import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import PricingBadge from '@/components/shared/PricingBadge'
-import StarRating from '@/components/shared/StarRating'
-import EmptyState from '@/components/shared/EmptyState'
+import PricingBadge from '@/components/common/PricingBadge'
+import StarRating from '@/components/common/StarRating'
+import EmptyState from '@/components/common/EmptyState'
 import { profileApi } from '@/api/profile.api'
 import { useAuthStore } from '@/store/authStore'
 import { formatDate, formatNumber } from '@/lib/utils'
 
-// ── Stat card ─────────────────────────────────────────────────────────────────
+// Stat card
 function StatCard({ icon: Icon, value, label, color = 'bg-primary/10 text-primary' }) {
   return (
     <div className="flex flex-col items-center gap-1.5 p-4 rounded-xl bg-muted/40 text-center">
@@ -33,7 +33,7 @@ function StatCard({ icon: Icon, value, label, color = 'bg-primary/10 text-primar
   )
 }
 
-// ── Tool card ─────────────────────────────────────────────────────────────────
+// Tool card
 function ToolCard({ tool }) {
   return (
     <Link
@@ -63,7 +63,7 @@ function ToolCard({ tool }) {
   )
 }
 
-// ── Social link ───────────────────────────────────────────────────────────────
+// Social link
 function SocialLink({ href, icon: Icon, label }) {
   if (!href) return null
 
@@ -80,7 +80,7 @@ function SocialLink({ href, icon: Icon, label }) {
   )
 }
 
-// ── Main ──────────────────────────────────────────────────────────────────────
+// Main
 export default function Profile() {
   const user = useAuthStore((s) => s.user)
   const updateUser = useAuthStore((s) => s.updateUser)
@@ -140,7 +140,7 @@ export default function Profile() {
   return (
     <div className="max-w-7xl mx-auto px-4 pt-12 pb-16 space-y-6">
 
-      {/* ── Ban notice ───────────────────────────────────────────────────── */}
+      {/* Ban notice */}
       {isBanned && (
         <div className="mb-6 p-4 rounded-xl border border-destructive/30 bg-destructive/5 flex items-start gap-3">
           <Ban className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
@@ -160,7 +160,7 @@ export default function Profile() {
         </div>
       )}
 
-      {/* ── Profile hero card ────────────────────────────────────────────── */}
+      {/* Profile hero card */}
       <div className="rounded-2xl border bg-card overflow-hidden mb-6">
         {/* Top colour strip */}
         <div className="h-20 bg-linear-to-r from-primary/20 via-primary/10 to-transparent" />
@@ -237,7 +237,7 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* ── Stats row ────────────────────────────────────────────────────── */}
+      {/* Stats row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
         <StatCard
           icon={Bookmark}
@@ -265,7 +265,7 @@ export default function Profile() {
         />
       </div>
 
-      {/* ── Tabs ─────────────────────────────────────────────────────────── */}
+      {/* Tabs */}
       <Tabs defaultValue="saved">
         <TabsList className="w-full sm:w-auto">
           <TabsTrigger value="saved" className="gap-2 flex-1 sm:flex-none">

@@ -155,3 +155,114 @@ body {
     @apply font-sans;
   }
 }
+
+@layer components {
+  .blog-rich-content {
+    @apply max-w-none text-base leading-8 text-foreground;
+  }
+
+  .blog-rich-content > :first-child {
+    margin-top: 0;
+  }
+
+  .blog-rich-content > :last-child {
+    margin-bottom: 0;
+  }
+
+  .blog-rich-content h1,
+  .blog-rich-content h2,
+  .blog-rich-content h3,
+  .blog-rich-content h4 {
+    @apply font-semibold tracking-tight text-foreground scroll-mt-28;
+  }
+
+  .blog-rich-content h1 {
+    @apply mt-10 mb-4 text-4xl leading-tight;
+  }
+
+  .blog-rich-content h2 {
+    @apply mt-9 mb-4 text-3xl leading-tight;
+  }
+
+  .blog-rich-content h3 {
+    @apply mt-8 mb-3 text-2xl leading-snug;
+  }
+
+  .blog-rich-content h4 {
+    @apply mt-6 mb-3 text-xl leading-snug;
+  }
+
+  .blog-rich-content p {
+    @apply my-4 text-[1rem] leading-8 text-foreground/90;
+  }
+
+  .blog-rich-content a {
+    @apply font-medium text-primary underline underline-offset-4 decoration-primary/35 break-words transition-colors hover:text-primary/80;
+  }
+
+  .blog-rich-content strong {
+    @apply font-semibold text-foreground;
+  }
+
+  .blog-rich-content em {
+    @apply italic;
+  }
+
+  .blog-rich-content ul,
+  .blog-rich-content ol {
+    @apply my-5 space-y-2 pl-6;
+  }
+
+  .blog-rich-content ul {
+    list-style: disc;
+  }
+
+  .blog-rich-content ol {
+    list-style: decimal;
+  }
+
+  .blog-rich-content li {
+    @apply pl-1 text-foreground/90;
+  }
+
+  .blog-rich-content li > p {
+    @apply my-0;
+  }
+
+  .blog-rich-content blockquote {
+    @apply my-6 rounded-r-lg border-l-4 border-primary/45 bg-muted/40 px-4 py-3 text-foreground/80;
+  }
+
+  .blog-rich-content pre {
+    @apply my-6 overflow-x-auto rounded-xl border border-border bg-muted/70 p-4 text-sm leading-6;
+  }
+
+  .blog-rich-content code {
+    @apply rounded bg-muted px-1.5 py-0.5 text-[0.9em] text-foreground;
+  }
+
+  .blog-rich-content pre code {
+    @apply bg-transparent p-0;
+  }
+
+  .blog-rich-content img {
+    @apply my-6 rounded-xl border border-border;
+  }
+
+  .blog-rich-content hr {
+    @apply my-8 border-border;
+  }
+
+  .blog-rich-content table {
+    @apply my-6 w-full border-collapse overflow-hidden rounded-lg border border-border text-sm;
+  }
+
+  .blog-rich-content th,
+  .blog-rich-content td {
+    @apply border border-border px-3 py-2 text-left align-top;
+  }
+
+  .blog-rich-content thead th {
+    @apply bg-muted/70 font-semibold text-foreground;
+  }
+}

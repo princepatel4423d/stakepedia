@@ -12,11 +12,11 @@ import {
   Select, SelectContent, SelectItem,
   SelectTrigger, SelectValue,
 } from '@/components/ui/select'
-import PricingBadge from '@/components/shared/PricingBadge'
-import StarRating from '@/components/shared/StarRating'
-import Pagination from '@/components/shared/Pagination'
-import EmptyState from '@/components/shared/EmptyState'
-import { BlogsBanner, PromptsBanner } from '@/components/shared/Banners'
+import PricingBadge from '@/components/common/PricingBadge'
+import StarRating from '@/components/common/StarRating'
+import Pagination from '@/components/common/Pagination'
+import EmptyState from '@/components/common/EmptyState'
+import { BlogsBanner, PromptsBanner } from '@/components/common/Banners'
 import { coursesApi } from '@/api/courses.api'
 
 const LEVEL_COLORS = {
@@ -166,7 +166,7 @@ export default function CoursesList() {
   const hasFilters = search || level || pricing || featured
   const items = data?.items || []
 
-  /* ── Split items at midpoint for banner injection ── */
+  /* Split items at midpoint for banner injection */
   const mid = Math.ceil(items.length / 2)
   const firstHalf = items.slice(0, mid)
   const secondHalf = items.slice(mid)
@@ -257,7 +257,7 @@ export default function CoursesList() {
             <CourseCard key={course._id} course={course} />
           ))}
 
-          {/* ── Mid-list banners ── */}
+          {/* Mid-list banners */}
           <BlogsBanner />
           <PromptsBanner />
 

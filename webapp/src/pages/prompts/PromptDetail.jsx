@@ -9,9 +9,9 @@ import {
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import ReviewForm from '@/components/shared/ReviewForm'
-import EmptyState from '@/components/shared/EmptyState'
-import StarRating from '@/components/shared/StarRating'
+import ReviewForm from '@/components/common/ReviewForm'
+import EmptyState from '@/components/common/EmptyState'
+import StarRating from '@/components/common/StarRating'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { promptsApi } from '@/api/prompts.api'
 import { reviewsApi } from '@/api/reviews.api'
@@ -138,7 +138,7 @@ export default function PromptDetail() {
 
       <div className="flex flex-col lg:flex-row gap-8">
 
-        {/* ══ LEFT — Main content ══════════════════════════════ */}
+        {/* LEFT - Main content */}
         <div className="flex-1 min-w-0 space-y-6">
 
           {/* Header */}
@@ -295,7 +295,7 @@ export default function PromptDetail() {
           </div>
         </div>
 
-        {/* ══ RIGHT — Sidebar ══════════════════════════════════ */}
+        {/* RIGHT - Sidebar */}
         <aside className="w-full lg:w-64 xl:w-72 shrink-0 space-y-4">
 
           {/* Quick actions */}

@@ -18,7 +18,7 @@ import {
     SelectTrigger, SelectValue,
 } from '@/components/ui/select'
 
-/* ── Schema ───────────────────────────────────────────────── */
+/* Schema */
 const schema = z.object({
     name: z.string().min(2, 'Name required'),
     email: z.string().email('Valid email required'),
@@ -26,7 +26,7 @@ const schema = z.object({
     message: z.string().min(20, 'Message must be at least 20 characters').max(2000),
 })
 
-/* ── Data ─────────────────────────────────────────────────── */
+/* Data */
 const SUBJECTS = [
     { value: 'general', label: 'General enquiry', icon: MessageSquare },
     { value: 'tool-submission', label: 'Submit an AI tool', icon: Lightbulb },
@@ -47,11 +47,11 @@ const CONTACT_INFO = [
 
 const SOCIAL = [
     { icon: Twitter, label: 'Twitter', href: '#', handle: '@stakepedia', hover: 'hover:bg-sky-500/10 hover:text-sky-500 hover:border-sky-500/30' },
-    { icon: Github, label: 'GitHub', href: '#', handle: 'stakepedia', hover: 'hover:bg-foreground/10 hover:text-foreground hover:border-foreground/20' },
-    { icon: Linkedin, label: 'LinkedIn', href: '#', handle: 'Stakepedia', hover: 'hover:bg-blue-500/10 hover:text-blue-500 hover:border-blue-500/30' },
+    /* { icon: Github, label: 'GitHub', href: '#', handle: 'stakepedia', hover: 'hover:bg-foreground/10 hover:text-foreground hover:border-foreground/20' }, */
+    /* { icon: Linkedin, label: 'LinkedIn', href: '#', handle: 'Stakepedia', hover: 'hover:bg-blue-500/10 hover:text-blue-500 hover:border-blue-500/30' }, */
 ]
 
-/* ── Component ────────────────────────────────────────────── */
+/* Component */
 export default function Contact() {
     const [sent, setSent] = useState(false)
 
@@ -77,7 +77,7 @@ export default function Contact() {
         reset()
     }
 
-    /* ── Success screen ───────────────────────────────────────── */
+    /* Success screen */
     if (sent) {
         return (
             <div className="pt-16 min-h-[80vh] flex items-center justify-center px-4">
@@ -97,11 +97,11 @@ export default function Contact() {
         )
     }
 
-    /* ── Main UI ──────────────────────────────────────────────── */
+    /* Main UI */
     return (
         <div className="py-8">
 
-            {/* ── Hero ─────────────────────────────────────────────── */}
+            {/* Hero */}
             <section className="relative py-12 overflow-hidden border-b border-border">
                 <div className="absolute inset-0 -z-10">
                     <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.3)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.3)_1px,transparent_1px)] bg-size-[64px_64px]" />
@@ -121,12 +121,12 @@ export default function Contact() {
                 </div>
             </section>
 
-            {/* ── Body ─────────────────────────────────────────────── */}
+            {/* Body */}
             <section className="py-12">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
-                        {/* ── FORM (2/3) ────────────────────────────────── */}
+                        {/* FORM (2/3) */}
                         <div className="lg:col-span-2">
                             <div className="rounded-2xl border border-border bg-card p-8">
                                 <h2 className="text-xl font-bold mb-1">Send a message</h2>
@@ -232,7 +232,7 @@ export default function Contact() {
                             </div>
                         </div>
 
-                        {/* ── SIDEBAR (1/3) ─────────────────────────────── */}
+                        {/* SIDEBAR (1/3) */}
                         <div className="space-y-5">
 
                             {/* Contact info cards */}

@@ -11,9 +11,9 @@ import {
   Select, SelectContent, SelectItem,
   SelectTrigger, SelectValue,
 } from '@/components/ui/select'
-import Pagination from '@/components/shared/Pagination'
-import EmptyState from '@/components/shared/EmptyState'
-import { CoursesBanner, JoinCommunityBanner } from '@/components/shared/Banners'
+import Pagination from '@/components/common/Pagination'
+import EmptyState from '@/components/common/EmptyState'
+import { CoursesBanner, JoinCommunityBanner } from '@/components/common/Banners'
 import { promptsApi } from '@/api/prompts.api'
 import { useAuthStore } from '@/store/authStore'
 import { toast } from 'sonner'

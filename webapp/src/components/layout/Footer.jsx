@@ -171,7 +171,7 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <Zap className="h-3 w-3 text-primary" />
-            Built for the AI community
+            Built by the Stakepedia team
           </div>
         </div>
       </div>

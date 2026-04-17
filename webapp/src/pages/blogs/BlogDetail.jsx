@@ -11,17 +11,17 @@ import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Skeleton } from '@/components/ui/skeleton'
-import EmptyState from '@/components/shared/EmptyState'
+import EmptyState from '@/components/common/EmptyState'
 import { blogsApi } from '@/api/blogs.api'
 import { useAuthStore } from '@/store/authStore'
 import { formatDate, readTime } from '@/lib/utils'
 import { toast } from 'sonner'
 
-/* ─── Parse h1/h2/h3 headings from HTML for TOC ────────── */
+/* Parse h2/h3 headings from HTML for TOC */
 function parseHeadings(html = '') {
   const div = document.createElement('div')
   div.innerHTML = html
-  const nodes = div.querySelectorAll('h1, h2, h3')
+  const nodes = div.querySelectorAll('h2, h3')
   return Array.from(nodes).map((node, i) => ({
     id: `heading-${i}`,
     text: node.textContent.trim(),
@@ -31,10 +31,17 @@ function parseHeadings(html = '') {
 
 function injectHeadingIds(html = '') {
   let i = 0
-  return html.replace(/<(h[123])(.*?)>/gi, (_, tag, attrs) => `<${tag}${attrs} id="heading-${i++}">`)
+  return html.replace(/<(h[1-4])(.*?)>/gi, (_, tag, attrs) => `<${tag}${attrs} id="heading-${i++}">`)
 }
 
-/* ─── Table of Contents ─────────────────────────────────── */
+function normalizeRichHtml(html = '') {
+  if (!html) return ''
+  return html
+    .replace(/<p>(?:\s|&nbsp;|<br\s*\/?\s*>)*<\/p>/gi, '')
+    .replace(/<li>\s*<p>([\s\S]*?)<\/p>\s*<\/li>/gi, '<li>$1</li>')
+}
+
+/* Table of Contents */
 function TableOfContents({ headings, activeId }) {
   if (!headings.length) return null
   return (
@@ -63,7 +70,7 @@ function TableOfContents({ headings, activeId }) {
   )
 }
 
-/* ─── Social share ──────────────────────────────────────── */
+/* Social share */
 function SocialShare({ url, title }) {
   const [copied, setCopied] = useState(false)
   const enc = encodeURIComponent(url)
@@ -99,7 +106,7 @@ function SocialShare({ url, title }) {
   )
 }
 
-/* ─── Related blog card ─────────────────────────────────── */
+/* Related blog card */
 function RelatedBlogCard({ blog }) {
   return (
     <Link to={`/blogs/${blog.slug}`}
@@ -120,7 +127,7 @@ function RelatedBlogCard({ blog }) {
   )
 }
 
-/* ─── Comment item ──────────────────────────────────────── */
+/* Comment item */
 function CommentItem({ comment, onDelete, canDelete }) {
   return (
     <div className="flex items-start gap-3 p-4 rounded-xl border border-border bg-card">
@@ -147,7 +154,7 @@ function CommentItem({ comment, onDelete, canDelete }) {
   )
 }
 
-/* ─── Main page ─────────────────────────────────────────── */
+/* Main page */
 export default function BlogDetail() {
   const { slug } = useParams()
   const qc = useQueryClient()
@@ -190,8 +197,9 @@ export default function BlogDetail() {
   /* Build TOC after blog loads */
   useEffect(() => {
     if (blog?.content) {
-      setHeadings(parseHeadings(blog.content))
-      setProcessedContent(injectHeadingIds(blog.content))
+      const normalized = normalizeRichHtml(blog.content)
+      setHeadings(parseHeadings(normalized))
+      setProcessedContent(injectHeadingIds(normalized))
     }
   }, [blog?.content])
 
@@ -246,7 +254,7 @@ export default function BlogDetail() {
     onError: (err) => toast.error(err.response?.data?.message || 'Failed to delete'),
   })
 
-  /* ── Loading ── */
+  /* Loading */
   if (isLoading) return (
     <div className="max-w-7xl mx-auto px-4 pt-24 pb-16">
       <Skeleton className="h-4 w-28 mb-8" />
@@ -282,7 +290,7 @@ export default function BlogDetail() {
 
       <div className="flex flex-col lg:flex-row gap-10">
 
-        {/* ══ LEFT — Article (80%) ══════════════════════════════ */}
+        {/* LEFT - Article (80%) */}
         <div className="flex-1 min-w-0">
 
           {/* Header */}
@@ -323,12 +331,7 @@ export default function BlogDetail() {
 
           {/* Article body */}
           <article
-            className="prose prose-sm sm:prose-base dark:prose-invert max-w-none mb-10
-              prose-headings:font-bold prose-headings:tracking-tight prose-headings:scroll-mt-28
-              prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-              prose-img:rounded-xl prose-img:border prose-img:border-border
-              prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground
-              prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm"
+            className="blog-rich-content mb-10"
             dangerouslySetInnerHTML={{ __html: processedContent || blog.content || '<p>Content will be added soon.</p>' }}
           />
 
@@ -414,12 +417,12 @@ export default function BlogDetail() {
           </section>
         </div>
 
-        {/* ══ RIGHT — Sidebar (20%) ════════════════════════════ */}
-        <aside className="w-full lg:w-64 xl:w-72 shrink-0 space-y-4">
+        {/* RIGHT — Sidebar (20%) */}
+        <aside className="w-full lg:w-64 xl:w-72 shrink-0 space-y-4 lg:sticky lg:top-24 lg:self-start">
 
           {/* Table of contents — sticky */}
           {headings.length > 0 && (
-            <div className="rounded-2xl border border-border bg-card p-4 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
+            <div className="rounded-2xl border border-border bg-card p-4">
               <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3 flex items-center gap-1.5">
                 <List className="h-3.5 w-3.5" /> On this page
               </h3>

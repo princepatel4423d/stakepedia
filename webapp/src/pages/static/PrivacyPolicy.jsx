@@ -171,7 +171,7 @@ If you have questions about this Privacy Policy or our privacy practices, contac
     },
 ]
 
-/* ── Render bold markdown in content ─────────────────────── */
+/* Render bold markdown in content */
 function renderContent(text) {
     return text.split('\n\n').filter(Boolean).map((para, i) => {
         const parts = para.trim().split(/(\*\*[^*]+\*\*)/)
@@ -187,7 +187,7 @@ function renderContent(text) {
     })
 }
 
-/* ── Main ─────────────────────────────────────────────────── */
+/* Main */
 export default function PrivacyPolicy() {
     const [activeSection, setActiveSection] = useState('overview')
     const observerRef = useRef(null)
@@ -213,7 +213,7 @@ export default function PrivacyPolicy() {
         <div className="pt-8">
             <div className="max-w-7xl mx-auto px-4 py-12">
 
-                {/* ── Page header ── */}
+                {/* Page header */}
                 <div className="mb-14">
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold mb-5">
                         <Shield className="h-3.5 w-3.5" />
@@ -233,7 +233,7 @@ export default function PrivacyPolicy() {
                     </div>
                     <p className="text-muted-foreground mt-5 leading-relaxed max-w-2xl text-sm border-l-2 border-primary pl-4">
                         Your privacy matters to us. This policy explains clearly what data we collect, why we collect it and how we protect it. Questions? Email us at{' '}
-                        <a href="mailto:jainishparmar63@gmail.com" className="text-primary hover:underline font-medium">jainishparmar63@gmail.com</a>.
+                        <a href="mailto:stakepedia@gmail.com" className="text-primary hover:underline font-medium">stakepedia@gmail.com</a>.
                     </p>
                 </div>
 
@@ -272,13 +272,13 @@ export default function PrivacyPolicy() {
                                 <a href="mailto:privacy@stakepedia.com"
                                     className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors">
                                     <Mail className="h-3.5 w-3.5 shrink-0" />
-                                    jainishparmar63@gmail.com
+                                    stakepedia@gmail.com
                                 </a>
                             </div>
                         </div>
                     </nav>
 
-                    {/* ── Content ── */}
+                    {/* Content */}
                     <div className="flex-1 min-w-0 space-y-2">
                         {SECTIONS.map(({ id, title, number, icon: Icon, content }) => (
                             <section

@@ -169,7 +169,7 @@ For general support, visit our Contact page. For privacy-related enquiries, see 
     },
 ]
 
-/* ── Render bold + bullet list content ───────────────────── */
+/* Render bold + bullet list content */
 function renderContent(text) {
     return text.split('\n\n').filter(Boolean).map((para, i) => {
         const trimmed = para.trim()
@@ -203,11 +203,11 @@ function renderContent(text) {
     })
 }
 
-/* ── Main ─────────────────────────────────────────────────── */
+/* Main */
 export default function Terms() {
     const [activeSection, setActiveSection] = useState('acceptance')
 
-    /* IntersectionObserver — auto-highlight active TOC item */
+    /* IntersectionObserver - auto-highlight active TOC item */
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -228,7 +228,7 @@ export default function Terms() {
         <div className="pt-8">
             <div className="max-w-7xl mx-auto px-4 py-12">
 
-                {/* ── Page header ── */}
+                {/* Page header */}
                 <div className="mb-14">
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold mb-5">
                         <FileText className="h-3.5 w-3.5" />
@@ -249,7 +249,7 @@ export default function Terms() {
 
                 <div className="flex flex-col lg:flex-row gap-10">
 
-                    {/* ── Sticky sidebar TOC ── */}
+                    {/* Sticky sidebar TOC */}
                     <nav className="lg:w-64 xl:w-72 shrink-0">
                         <div className="lg:sticky lg:top-24">
                             <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3 px-3">
@@ -279,10 +279,10 @@ export default function Terms() {
                             {/* Quick contact */}
                             <div className="mt-6 p-4 rounded-2xl border border-border bg-card">
                                 <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">Legal contact</p>
-                                <a href="mailto:jainishparmar63@gmail.com"
+                                <a href="mailto:stakepedia@gmail.com"
                                     className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors">
                                     <Mail className="h-3.5 w-3.5 shrink-0" />
-                                    jainishparmar63@gmail.com
+                                    stakepedia@gmail.com
                                 </a>
                                 <Link to="/contact"
                                     className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors mt-2">
@@ -293,7 +293,7 @@ export default function Terms() {
                         </div>
                     </nav>
 
-                    {/* ── Content ── */}
+                    {/* Content */}
                     <div className="flex-1 min-w-0 space-y-2">
                         {SECTIONS.map(({ id, title, number, icon: Icon, content }) => (
                             <section

@@ -15,17 +15,17 @@ import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import PricingBadge from '@/components/shared/PricingBadge'
-import StarRating from '@/components/shared/StarRating'
-import ReviewForm from '@/components/shared/ReviewForm'
-import EmptyState from '@/components/shared/EmptyState'
+import PricingBadge from '@/components/common/PricingBadge'
+import StarRating from '@/components/common/StarRating'
+import ReviewForm from '@/components/common/ReviewForm'
+import EmptyState from '@/components/common/EmptyState'
 import { aiToolsApi } from '@/api/aitools.api'
 import { reviewsApi } from '@/api/reviews.api'
 import { useAuthStore } from '@/store/authStore'
 import { formatDate, formatNumber } from '@/lib/utils'
 import { toast } from 'sonner'
 
-/* ─── small helpers ─────────────────────────────────────────── */
+/* small helpers */
 
 function InfoRow({ label, value, href }) {
   return (
@@ -33,7 +33,7 @@ function InfoRow({ label, value, href }) {
       <span className="text-[11px] uppercase tracking-wider text-muted-foreground font-medium">{label}</span>
       {href
         ? <a href={href} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline inline-flex items-center gap-1">{value} <ExternalLink className="h-3 w-3" /></a>
-        : <span className="text-sm font-medium text-foreground">{value || '—'}</span>
+        : <span className="text-sm font-medium text-foreground">{value || 'N/A'}</span>
       }
     </div>
   )
@@ -124,7 +124,7 @@ function PricingPlanCard({ plan }) {
   )
 }
 
-/* ─── Main component ─────────────────────────────────────────── */
+/* Main component */
 
 export default function AIToolDetail() {
   const { slug } = useParams()
@@ -202,7 +202,7 @@ export default function AIToolDetail() {
         Back to AI Tools
       </Link>
 
-      {/* ── Hero card ── */}
+      {/* Hero card */}
       <div className="relative rounded-3xl border border-border bg-card overflow-hidden mb-6">
         {/* Cover / header band */}
         <div className="relative h-40 w-full bg-linear-to-br from-primary/10 via-primary/5 to-transparent overflow-hidden">
@@ -293,10 +293,10 @@ export default function AIToolDetail() {
         </div>
       </div>
 
-      {/* ── Two-column layout ── */}
+      {/* Two-column layout */}
       <div className="flex flex-col lg:flex-row gap-6">
 
-        {/* ── Left: Tabs ── */}
+        {/* Left: Tabs */}
         <div className="flex-1 min-w-0">
           <Tabs defaultValue="overview">
             <TabsList className="mb-6 w-full justify-start overflow-x-auto flex-nowrap">
@@ -312,7 +312,7 @@ export default function AIToolDetail() {
               </TabsTrigger>
             </TabsList>
 
-            {/* ── OVERVIEW ── */}
+            {/* OVERVIEW */}
             <TabsContent value="overview" className="space-y-6">
               {/* Description */}
               <div className="rounded-2xl border border-border bg-card p-5">
@@ -320,7 +320,7 @@ export default function AIToolDetail() {
                   <BookOpen className="h-4 w-4 text-primary" /> About
                 </h2>
                 <p className="text-sm leading-7 text-muted-foreground">
-                  {tool.description || 'Detailed description is not available yet.'}
+                  {tool.description || 'Description is not available yet.'}
                 </p>
               </div>
 
@@ -387,7 +387,7 @@ export default function AIToolDetail() {
               )}
             </TabsContent>
 
-            {/* ── FEATURES ── */}
+            {/* FEATURES */}
             {tool.features?.length > 0 && (
               <TabsContent value="features" className="space-y-2">
                 {tool.features.map((f, i) => (
@@ -401,7 +401,7 @@ export default function AIToolDetail() {
               </TabsContent>
             )}
 
-            {/* ── PRICING PLANS ── */}
+            {/* PRICING PLANS */}
             {hasPricingPlans && (
               <TabsContent value="pricing">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -412,7 +412,7 @@ export default function AIToolDetail() {
               </TabsContent>
             )}
 
-            {/* ── PROS & CONS ── */}
+            {/* PROS & CONS */}
             {hasProsCons && (
               <TabsContent value="proscons">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -432,7 +432,7 @@ export default function AIToolDetail() {
               </TabsContent>
             )}
 
-            {/* ── PROMPT TIPS ── */}
+            {/* PROMPT TIPS */}
             {tool.promptTips?.length > 0 && (
               <TabsContent value="prompts" className="space-y-3">
                 {tool.promptTips.map((tip, i) => (
@@ -444,7 +444,7 @@ export default function AIToolDetail() {
               </TabsContent>
             )}
 
-            {/* ── TUTORIALS ── */}
+            {/* TUTORIALS */}
             {hasTutorials && (
               <TabsContent value="tutorials" className="space-y-3">
                 {[...tool.tutorials].sort((a, b) => a.sortOrder - b.sortOrder).map((tut, i) => (
@@ -469,7 +469,7 @@ export default function AIToolDetail() {
               </TabsContent>
             )}
 
-            {/* ── FAQs ── */}
+            {/* FAQs */}
             {hasFaqs && (
               <TabsContent value="faqs" className="space-y-2">
                 {tool.faqs.map((faq, i) => (
@@ -478,7 +478,7 @@ export default function AIToolDetail() {
               </TabsContent>
             )}
 
-            {/* ── REVIEWS ── */}
+            {/* REVIEWS */}
             <TabsContent value="reviews" className="space-y-5">
               {/* Rating summary */}
               {tool.averageRating > 0 && (
@@ -524,7 +524,7 @@ export default function AIToolDetail() {
           </Tabs>
         </div>
 
-        {/* ── Right sidebar ── */}
+        {/* Right sidebar */}
         <aside className="w-full lg:w-72 xl:w-80 shrink-0 space-y-4">
 
           {/* Tool info card */}

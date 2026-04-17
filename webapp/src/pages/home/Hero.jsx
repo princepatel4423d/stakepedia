@@ -74,7 +74,7 @@ const Hero = ({
 
                     {/* Description */}
                     <p className="text-sm sm:text-base text-muted-foreground max-w-lg mb-6">
-                        Explore curated AI tools, powerful prompts, expert courses, and real-world use cases —
+                        Explore curated AI tools, powerful prompts, expert courses, and real-world use cases -
                         everything you need to build, learn, and grow with AI.
                     </p>
 

@@ -25,7 +25,7 @@ import { useAuthStore }  from '@/store/authStore'
 import { profileApi }    from '@/api/profile.api'
 import { formatDate }    from '@/lib/utils'
 
-// ── Schemas ───────────────────────────────────────────────────────────────────
+// Schemas
 const profileSchema = z.object({
   name:    z.string().min(2, 'At least 2 characters').max(50),
   bio:     z.string().max(300, 'Max 300 characters').optional().or(z.literal('')),
@@ -48,7 +48,7 @@ const passwordSchema = z.object({
   path: ['confirmPassword'],
 })
 
-// ── Password strength ─────────────────────────────────────────────────────────
+// Password strength
 function PasswordStrength({ password = '' }) {
   const checks = [
     { label: '8+ characters',     met: password.length >= 8 },
@@ -90,7 +90,7 @@ function PasswordStrength({ password = '' }) {
   )
 }
 
-// ── Main ──────────────────────────────────────────────────────────────────────
+// Main
 export default function ProfileSettings() {
   const user        = useAuthStore((s) => s.user)
   const updateUser  = useAuthStore((s) => s.updateUser)
@@ -236,7 +236,7 @@ export default function ProfileSettings() {
           </TabsTrigger>
         </TabsList>
 
-        {/* ── Profile tab ─────────────────────────────────────────────── */}
+        {/* Profile tab */}
         <TabsContent value="profile" className="space-y-6">
           {/* Avatar */}
           <Card>
@@ -444,7 +444,7 @@ export default function ProfileSettings() {
           </Card>
         </TabsContent>
 
-        {/* ── Security tab ─────────────────────────────────────────────── */}
+        {/* Security tab */}
         <TabsContent value="security" className="space-y-6">
           {/* Password change — only for local auth */}
           {currentUser?.authProvider === 'local' ? (
@@ -587,7 +587,7 @@ export default function ProfileSettings() {
           </Card>
         </TabsContent>
 
-        {/* ── Account tab ──────────────────────────────────────────────── */}
+        {/* Account tab */}
         <TabsContent value="account" className="space-y-6">
           {/* Account overview */}
           <Card>

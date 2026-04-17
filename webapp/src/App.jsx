@@ -3,8 +3,8 @@ import { Routes, Route } from 'react-router-dom'
 import { useThemeStore } from '@/store/themeStore'
 import MainLayout from '@/components/layout/MainLayout'
 import AuthLayout from '@/components/layout/AuthLayout'
-import ProtectedRoute from '@/components/shared/ProtectedRoute'
-import PageLoader from '@/components/shared/PageLoader'
+import ProtectedRoute from '@/components/common/ProtectedRoute'
+import PageLoader from '@/components/common/PageLoader'
 
 const Home = lazy(() => import('@/pages/home/Home'))
 const AIToolsList = lazy(() => import('@/pages/ai-tools/AIToolsList'))
@@ -16,7 +16,7 @@ const CourseDetail = lazy(() => import('@/pages/courses/CourseDetail'))
 const LessonView = lazy(() => import('@/pages/courses/LessonView'))
 const PromptsList = lazy(() => import('@/pages/prompts/PromptsList'))
 const PromptDetail = lazy(() => import('@/pages/prompts/PromptDetail'))
-const SearchPage = lazy(() => import('@/pages/SearchPage'))
+const SearchPage = lazy(() => import('@/components/common/SearchPage'))
 const Login = lazy(() => import('@/pages/auth/Login'))
 const Register = lazy(() => import('@/pages/auth/Register'))
 const GoogleAuthCallback = lazy(() => import('@/pages/auth/GoogleAuthCallback'))
@@ -25,7 +25,7 @@ const ForgotPassword = lazy(() => import('@/pages/auth/ForgotPassword'))
 const ResetPassword = lazy(() => import('@/pages/auth/ResetPassword'))
 const Profile = lazy(() => import('@/pages/profile/Profile'))
 const ProfileSettings = lazy(() => import('@/pages/profile/ProfileSettings'))
-const NotFound = lazy(() => import('@/pages/NotFound'))
+const NotFound = lazy(() => import('@/components/common/NotFound'))
 
 // Add these lazy imports at the top with the others:
 const About = lazy(() => import('@/pages/static/About'))

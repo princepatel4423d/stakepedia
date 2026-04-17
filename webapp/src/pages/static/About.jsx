@@ -104,7 +104,7 @@ export default function About() {
     return (
         <div className="pt-6">
 
-            {/* ══ HERO ═══════════════════════════════════════════════ */}
+            {/* HERO */}
             <section className="relative py-12 overflow-hidden">
                 <div className="absolute inset-0 -z-10">
                     <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.3)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.3)_1px,transparent_1px)] bg-size-[64px_64px]" />
@@ -127,7 +127,7 @@ export default function About() {
                 </div>
             </section>
 
-            {/* ══ STATS ══════════════════════════════════════════════ */}
+            {/* STATS */}
             <section className="border-y border-border bg-muted/20">
                 <div className="max-w-7xl mx-auto px-4 py-8">
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -146,7 +146,7 @@ export default function About() {
                 </div>
             </section>
 
-            {/* ══ MISSION ════════════════════════════════════════════ */}
+            {/* MISSION */}
             <section className="py-14">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -191,7 +191,7 @@ export default function About() {
                 </div>
             </section>
 
-            {/* ══ VALUES ═════════════════════════════════════════════ */}
+            {/* VALUES */}
             <section className="py-14 bg-muted/20 border-y border-border">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="text-center mb-14">
@@ -251,7 +251,7 @@ export default function About() {
                 </div>
             </section>
 
-            {/* ══ CTA ════════════════════════════════════════════════ */}
+            {/* CTA */}
             <section className="py-14 relative overflow-hidden">
                 <div className="absolute inset-0 -z-10 bg-primary" />
                 <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,hsl(var(--primary-foreground)/0.04)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary-foreground)/0.04)_1px,transparent_1px)] bg-size-[40px_40px]" />

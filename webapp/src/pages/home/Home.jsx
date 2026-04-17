@@ -9,9 +9,9 @@ import {
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
-import PricingBadge from '@/components/shared/PricingBadge'
-import StarRating from '@/components/shared/StarRating'
-import { ReviewsBanner } from '@/components/shared/Banners'
+import PricingBadge from '@/components/common/PricingBadge'
+import StarRating from '@/components/common/StarRating'
+import { ReviewsBanner } from '@/components/common/Banners'
 import { aiToolsApi } from '@/api/aitools.api'
 import { blogsApi } from '@/api/blogs.api'
 import { categoriesApi } from '@/api/categories.api'
@@ -22,7 +22,7 @@ import { formatDate, readTime } from '@/lib/utils'
 import Hero from './Hero'
 import CTASection from './CTASection'
 
-/* ─── Tool card ─────────────────────────────────────────── */
+/* Tool card */
 function ToolCard({ tool }) {
   return (
     <Link
@@ -70,7 +70,7 @@ function ToolCard({ tool }) {
   )
 }
 
-/* ─── Blog card ─────────────────────────────────────────── */
+/* Blog card */
 function BlogCard({ blog }) {
   return (
     <Link
@@ -98,7 +98,7 @@ function BlogCard({ blog }) {
   )
 }
 
-/* ─── Course card ───────────────────────────────────────── */
+/* Course card */
 function CourseCard({ course }) {
   const totalDuration = course.totalDuration || course.lessons?.reduce((s, l) => s + (l.duration || 0), 0) || 0
   return (
@@ -131,7 +131,7 @@ function CourseCard({ course }) {
   )
 }
 
-/* ─── Main ─────────────────────────────────────────────── */
+/* Main */
 export default function Home() {
   const { data: featuredTools, isLoading: toolsLoading } = useQuery({
     queryKey: ['featured-tools'],
@@ -237,7 +237,7 @@ export default function Home() {
         }}
       />
 
-      {/* ══ CATEGORIES ═══════════════════════════════════════ */}
+      {/* CATEGORIES */}
       {categories?.length > 0 && (
         <section className="py-14 bg-muted/20 border-y border-border/40">
           <div className="max-w-7xl mx-auto px-4">
@@ -275,7 +275,7 @@ export default function Home() {
         </section>
       )}
 
-      {/* ══ FEATURED TOOLS ═══════════════════════════════════ */}
+      {/* FEATURED TOOLS */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-end justify-between mb-10">
@@ -324,7 +324,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══ WHY US — Feature strip ═══════════════════════════ */}
+      {/* WHY US — Feature strip */}
       <section className="py-16 bg-muted/20 border-y border-border/40">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
@@ -347,7 +347,7 @@ export default function Home() {
               {
                 icon: Zap, color: 'text-amber-500', bg: 'bg-amber-500/10',
                 title: 'Prompt Library',
-                desc: 'Over 1,000 ready-to-use prompts with variable support — just fill in and copy.',
+                desc: 'Over 1,000 ready-to-use prompts with variable support - just fill in and copy.',
               },
               {
                 icon: FileText, color: 'text-emerald-500', bg: 'bg-emerald-500/10',
@@ -369,7 +369,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══ COURSES ══════════════════════════════════════════ */}
+      {/* COURSES */}
       {(coursesLoading || courses.length > 0) && (
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-4">
@@ -397,7 +397,7 @@ export default function Home() {
         </section>
       )}
 
-      {/* ══ BLOGS + PROMPTS SPLIT ════════════════════════════ */}
+      {/* BLOGS + PROMPTS SPLIT */}
       <section className="py-16 bg-muted/20 border-y border-border/40">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -463,7 +463,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══ CTA BANNER ═══════════════════════════════════════ */}
+      {/* CTA BANNER */}
       <CTASection stats={ctaStats} />
 
       {/* Float animation keyframes */}

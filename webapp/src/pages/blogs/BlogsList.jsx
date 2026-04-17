@@ -7,13 +7,13 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import Pagination from '@/components/shared/Pagination'
-import EmptyState from '@/components/shared/EmptyState'
-import { NewsletterBanner, CoursesBanner } from '@/components/shared/Banners'
+import Pagination from '@/components/common/Pagination'
+import EmptyState from '@/components/common/EmptyState'
+import { NewsletterBanner, CoursesBanner } from '@/components/common/Banners'
 import { blogsApi } from '@/api/blogs.api'
 import { formatDate, readTime } from '@/lib/utils'
 
-/* ─── Big featured hero (left side) ────────────────────── */
+/* Big featured hero (left side) */
 function HeroBlogCard({ blog }) {
   return (
     <Link
@@ -54,7 +54,7 @@ function HeroBlogCard({ blog }) {
   )
 }
 
-/* ─── Small sidebar blog row ────────────────────────────── */
+/* Small sidebar blog row */
 function SidebarBlogCard({ blog }) {
   return (
     <Link
@@ -89,7 +89,7 @@ function SidebarBlogCard({ blog }) {
   )
 }
 
-/* ─── Grid blog card ─────────────────────────────────────── */
+/* Grid blog card */
 function BlogCard({ blog }) {
   return (
     <Link
@@ -156,7 +156,7 @@ function BlogCardSkeleton() {
   )
 }
 
-/* ─── Main ─────────────────────────────────────────────── */
+/* Main */
 export default function BlogsList() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [searchInput, setSearchInput] = useState(searchParams.get('q') || '')
@@ -219,7 +219,7 @@ export default function BlogsList() {
   const items = data?.items || []
   const showHeroSection = page === 1 && !hasFilters && featuredBlogs.length > 0
 
-  /* ── Split items at midpoint for banner injection ── */
+  /* Split items at midpoint for banner injection */
   const mid = Math.ceil(items.length / 2)
   const firstHalf = items.slice(0, mid)
   const secondHalf = items.slice(mid)
@@ -322,7 +322,7 @@ export default function BlogsList() {
             <BlogCard key={blog._id} blog={blog} />
           ))}
 
-          {/* ── Mid-list banners ── */}
+          {/* Mid-list banners */}
           <NewsletterBanner />
           <CoursesBanner />
 

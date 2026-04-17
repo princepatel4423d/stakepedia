@@ -8,7 +8,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
-import EmptyState from '@/components/shared/EmptyState'
+import EmptyState from '@/components/common/EmptyState'
 import { coursesApi } from '@/api/courses.api'
 import { useAuthStore } from '@/store/authStore'
 
@@ -105,7 +105,7 @@ export default function LessonView() {
 
       <div className="flex flex-col lg:flex-row gap-8">
 
-        {/* ══ LEFT — Lesson content ══════════════════════════════ */}
+        {/* LEFT - Lesson content */}
         <div className="flex-1 min-w-0 space-y-6">
 
           {/* Lesson header */}
@@ -219,7 +219,7 @@ export default function LessonView() {
           </div>
         </div>
 
-        {/* ══ RIGHT — Course sidebar ═══════════════════════════ */}
+        {/* RIGHT - Course sidebar */}
         <aside className="w-full lg:w-72 xl:w-80 shrink-0">
           <div className="lg:sticky lg:top-24 space-y-4">
 

@@ -1,6 +1,5 @@
 /**
  * InListBanners.jsx
- * ─────────────────────────────────────────────────────────────
  * A collection of mid-list promotional components.
  *
  * USAGE EXAMPLE — BlogsList, CoursesList, AIToolsList, PromptsList:
@@ -30,7 +29,6 @@
  * Each banner is self-contained and works in any list layout
  * (vertical list OR grid — they all span full width via col-span-full
  *  when used inside a CSS grid).
- * ─────────────────────────────────────────────────────────────
  */
 
 import { useState } from 'react'
@@ -43,8 +41,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 
-/* ─── Shared wrapper ─────────────────────────────────────────
-   Handles the col-span-full trick for grid lists               */
+/* Shared wrapper Handles the col-span-full trick for grid lists */
 function BannerWrapper({ children, className = '' }) {
     return (
         <div className={`col-span-full w-full ${className}`}>
@@ -53,10 +50,7 @@ function BannerWrapper({ children, className = '' }) {
     )
 }
 
-/* ══════════════════════════════════════════════════════════════
-   1. NEWSLETTER BANNER
-   Best for: BlogsList, AIToolsList (any page)
-   ══════════════════════════════════════════════════════════════ */
+/* 1. NEWSLETTER BANNER Best for: BlogsList, AIToolsList (any page) */
 export function NewsletterBanner() {
     const [email, setEmail] = useState('')
     const [sent, setSent] = useState(false)
@@ -120,10 +114,7 @@ export function NewsletterBanner() {
     )
 }
 
-/* ══════════════════════════════════════════════════════════════
-   2. SUBMIT A TOOL BANNER
-   Best for: AIToolsList
-   ══════════════════════════════════════════════════════════════ */
+/* 2. SUBMIT A TOOL BANNER Best for: AIToolsList */
 export function SubmitToolBanner() {
     return (
         <BannerWrapper>
@@ -154,10 +145,7 @@ export function SubmitToolBanner() {
     )
 }
 
-/* ══════════════════════════════════════════════════════════════
-   3. PROMPTS LIBRARY BANNER
-   Best for: AIToolsList, BlogsList
-   ══════════════════════════════════════════════════════════════ */
+/* 3. PROMPTS LIBRARY BANNER Best for: AIToolsList, BlogsList */
 export function PromptsBanner() {
     const categories = ['Coding', 'Writing', 'Marketing', 'SEO', 'Design']
 
@@ -206,10 +194,7 @@ export function PromptsBanner() {
     )
 }
 
-/* ══════════════════════════════════════════════════════════════
-   4. COURSES BANNER
-   Best for: BlogsList, PromptsList, AIToolsList
-   ══════════════════════════════════════════════════════════════ */
+/* 4. COURSES BANNER Best for: BlogsList, PromptsList, AIToolsList */
 export function CoursesBanner() {
     const highlights = ['Beginner to advanced', 'Free & paid courses', 'Video lessons', 'Certificates']
 
@@ -252,10 +237,7 @@ export function CoursesBanner() {
     )
 }
 
-/* ══════════════════════════════════════════════════════════════
-   5. BLOGS BANNER
-   Best for: AIToolsList, CoursesList, PromptsList
-   ══════════════════════════════════════════════════════════════ */
+/* 5. BLOGS BANNER Best for: AIToolsList, CoursesList, PromptsList */
 export function BlogsBanner() {
     return (
         <BannerWrapper>
@@ -285,10 +267,7 @@ export function BlogsBanner() {
     )
 }
 
-/* ══════════════════════════════════════════════════════════════
-   6. JOIN COMMUNITY / REGISTER BANNER
-   Best for: any listing page (unauthenticated users)
-   ══════════════════════════════════════════════════════════════ */
+/* 6. JOIN COMMUNITY / REGISTER BANNER Best for: any listing page (unauthenticated users) */
 export function JoinCommunityBanner() {
     return (
         <BannerWrapper>
@@ -344,10 +323,7 @@ export function JoinCommunityBanner() {
     )
 }
 
-/* ══════════════════════════════════════════════════════════════
-   7. FEATURED TOOLS STRIP — shows 3 tool pills inline
-   Best for: BlogsList, CoursesList, PromptsList
-   ══════════════════════════════════════════════════════════════ */
+/* 7. FEATURED TOOLS STRIP — shows 3 tool pills inline Best for: BlogsList, CoursesList, PromptsList */
 export function FeaturedToolsStrip({ tools = [] }) {
     if (!tools.length) return null
     return (
@@ -383,10 +359,7 @@ export function FeaturedToolsStrip({ tools = [] }) {
     )
 }
 
-/* ══════════════════════════════════════════════════════════════
-   8. RATING / REVIEW CTA BANNER
-   Best for: AIToolsList, CoursesList (after a few results)
-   ══════════════════════════════════════════════════════════════ */
+/* 8. RATING / REVIEW CTA BANNER Best for: AIToolsList, CoursesList (after a few results) */
 export function ReviewsBanner() {
     return (
         <BannerWrapper>
