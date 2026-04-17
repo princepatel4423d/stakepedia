@@ -39,7 +39,7 @@ const CONTACT_INFO = [
     {
         icon: Mail,
         title: 'Email us',
-        value: 'jainishparmar63@gmail.com',
+        value: 'stakepedia@gmail.com',
         note: 'We reply within 24 hours on business days',
         color: 'bg-primary/10 text-primary',
     }

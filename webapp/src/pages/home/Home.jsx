@@ -30,19 +30,19 @@ function ToolCard({ tool }) {
       className="group relative flex flex-col rounded-2xl border border-border/60 bg-card overflow-hidden hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-0.5 transition-all duration-300"
     >
       {/* Mini cover band */}
-      <div className="h-20 w-full bg-linear-to-br from-primary/8 to-transparent overflow-hidden relative">
+      <div className="h-24 w-full bg-linear-to-br from-primary/8 to-transparent overflow-hidden relative">
         {tool.coverImage && (
-          <img src={tool.coverImage} alt="" className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-300" referrerPolicy="no-referrer" />
+          <img src={tool.coverImage} alt="" className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-300" referrerPolicy="no-referrer" />
         )}
         {tool.isFeatured && (
           <span className="absolute top-2 right-2 inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-amber-400/90 text-amber-950 text-[9px] font-bold uppercase tracking-wide">
-            <Sparkles className="h-2 w-2" /> Hot
+            <Sparkles className="h-2 w-2" /> Featured
           </span>
         )}
       </div>
       {/* Logo */}
-      <div className="px-4 -mt-5 mb-3">
-        <div className="h-10 w-10 rounded-xl border-2 border-background bg-card shadow-md flex items-center justify-center overflow-hidden">
+      <div className="px-4 -mt-5 mb-3 z-10">
+        <div className="h-12 w-12 rounded-xl border-2 border-background bg-card shadow-md flex items-center justify-center overflow-hidden">
           {tool.logo
             ? <img src={tool.logo} alt={tool.name} className="h-full w-full object-cover" referrerPolicy="no-referrer" />
             : <Bot className="h-5 w-5 text-muted-foreground" />}

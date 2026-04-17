@@ -146,9 +146,7 @@ Some jurisdictions do not allow the exclusion of certain warranties or limitatio
         title: 'Governing law',
         number: '09',
         icon: Scale,
-        content: `These Terms shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law provisions.
-
-Any disputes arising from these Terms or your use of the Service shall be subject to the exclusive jurisdiction of the courts located in Ahmedabad, Gujarat, India.
+        content: `These Terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law principles.
 
 If any provision of these Terms is found to be unenforceable or invalid, that provision will be limited or eliminated to the minimum extent necessary so that the Terms will otherwise remain in full force and effect.
 
@@ -159,11 +157,10 @@ Our failure to enforce any right or provision of these Terms will not be conside
         title: 'Contact',
         number: '10',
         icon: Globe,
-        content: `Questions about these Terms should be sent to legal@stakepedia.com.
+        content: `Questions about these Terms should be sent to stakepedia@gmail.com.
 
 **Stakepedia**
-Ahmedabad, Gujarat, India
-legal@stakepedia.com
+stakepedia@gmail.com
 
 For general support, visit our Contact page. For privacy-related enquiries, see our Privacy Policy.`,
     },
@@ -330,8 +327,8 @@ export default function Terms() {
                                         Our team is happy to clarify anything. Reach out to our legal team or use our general contact page.
                                     </p>
                                     <div className="flex flex-wrap gap-4 text-sm">
-                                        <a href="mailto:legal@stakepedia.com" className="flex items-center gap-1.5 text-primary hover:underline font-medium">
-                                            <Scale className="h-3.5 w-3.5" /> legal@stakepedia.com
+                                        <a href="mailto:stakepedia@gmail.com" className="flex items-center gap-1.5 text-primary hover:underline font-medium">
+                                            <Scale className="h-3.5 w-3.5" /> stakepedia@gmail.com
                                         </a>
                                         <Link to="/contact" className="flex items-center gap-1.5 text-primary hover:underline font-medium">
                                             <MessageSquare className="h-3.5 w-3.5" /> Contact page

@@ -112,7 +112,7 @@ We do not use advertising or tracking cookies. We do not allow third-party adver
         title: 'Your rights',
         number: '07',
         icon: Users,
-        content: `Depending on your location, you may have the following rights regarding your personal data:
+        content: `You have the following rights regarding your personal data:
 
 **Right of access.** You can request a copy of the personal data we hold about you.
 
