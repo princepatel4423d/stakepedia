@@ -41,11 +41,11 @@ export default function Footer() {
       {/* Subtle background glow */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_35%_at_50%_0%,hsl(var(--primary)/0.07),transparent)]" />
 
-      {/* ── Main section: 30 / 70 ── */}
+      {/* Main section: 30 / 70 */}
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="flex flex-col lg:flex-row gap-12">
 
-          {/* ── LEFT 30% — Brand + newsletter + social ── */}
+          {/* LEFT 30% — Brand + newsletter + social */}
           <div className="w-full lg:w-[30%] shrink-0 flex flex-col gap-6">
 
             {/* Logo */}
@@ -58,7 +58,7 @@ export default function Footer() {
 
             {/* Tagline */}
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Discover, compare and learn AI tools, prompts and courses — all in one powerful platform built for creators and developers.
+              Discover, compare and learn AI tools, prompts and courses - all in one powerful platform built for creators and developers.
             </p>
 
             {/* Newsletter */}
@@ -92,10 +92,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ── RIGHT 70% — Links grid + CTA card ── */}
+          {/* RIGHT 70% - Links grid + CTA card */}
           <div className="flex-1 flex flex-col gap-10">
 
-            {/* Links grid — 4 equal columns */}
+            {/* Links grid - 4 equal columns */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
               {Object.entries(LINKS).map(([section, links]) => (
                 <div key={section}>
@@ -117,7 +117,7 @@ export default function Footer() {
               ))}
             </div>
 
-            {/* ── Full-width CTA card ── */}
+            {/* Full-width CTA card */}
             <div className="relative group">
               <div className="absolute -inset-0.5 bg-linear-to-r from-primary/40 to-blue-500/30 blur-xl opacity-20 group-hover:opacity-40 transition-opacity rounded-2xl" />
               <div className="relative rounded-2xl bg-linear-to-br from-primary to-blue-600 text-white shadow-xl overflow-hidden">
@@ -163,7 +163,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ── Bottom bar ── */}
+      {/* Bottom bar */}
       <div className="border-t border-border/50">
         <div className="max-w-7xl mx-auto px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-muted-foreground">
