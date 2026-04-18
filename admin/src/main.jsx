@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from '@/components/ui/sonner'
 import '@/styles/index.css'
 import App from '@/App.jsx'
+import { HelmetProvider } from 'react-helmet-async'
 
 // Apply theme immediately before React renders to prevent flash
 const applyThemeImmediately = () => {
@@ -37,11 +38,13 @@ const queryClient = new QueryClient({
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <App />
-        <Toaster position="top-right" richColors closeButton />
-      </BrowserRouter>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <App />
+          <Toaster position="top-right" richColors closeButton />
+        </BrowserRouter>
+      </QueryClientProvider>
+    </HelmetProvider>
   </StrictMode>
 )
