@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
@@ -131,47 +130,34 @@ const SiteSettings = () => {
         saveMutation.mutate(payload)
     }
 
-    // SEO meta values
-    const metaTitle = watch('seo.metaTitle') || 'Stakepedia Admin'
-    const metaDescription = watch('seo.metaDescription') || 'Manage Stakepedia admin settings.'
-    const ogImage = watch('seo.ogImage') || ''
-
     return (
-        <>
-            <Helmet>
-                <title>{metaTitle}</title>
-                <meta name="description" content={metaDescription} />
-                <meta property="og:title" content={metaTitle} />
-                <meta property="og:description" content={metaDescription} />
-                {ogImage && <meta property="og:image" content={ogImage} />}
-            </Helmet>
-            <div className="space-y-4">
-                <PageHeader
-                    title="Site settings"
-                    description="Manage global site configuration"
-                    breadcrumbs={[
-                        { label: 'Dashboard', href: '/dashboard' },
-                        { label: 'Settings' },
-                    ]}
-                    actions={
-                        <Button onClick={handleSubmit(onSubmit)} disabled={saveMutation.isPending || isLoading}>
-                            <Save className="h-4 w-4 mr-2" />
-                            {saveMutation.isPending ? 'Saving...' : 'Save settings'}
-                        </Button>
-                    }
-                />
+        <div className="space-y-4">
+            <PageHeader
+                title="Site settings"
+                description="Manage global site configuration"
+                breadcrumbs={[
+                    { label: 'Dashboard', href: '/dashboard' },
+                    { label: 'Settings' },
+                ]}
+                actions={
+                    <Button onClick={handleSubmit(onSubmit)} disabled={saveMutation.isPending || isLoading}>
+                        <Save className="h-4 w-4 mr-2" />
+                        {saveMutation.isPending ? 'Saving...' : 'Save settings'}
+                    </Button>
+                }
+            />
 
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <Tabs defaultValue="general">
-                        <TabsList>
-                            <TabsTrigger value="general">General</TabsTrigger>
-                            <TabsTrigger value="seo">SEO</TabsTrigger>
-                            <TabsTrigger value="social">Social</TabsTrigger>
-                            <TabsTrigger value="advanced">Advanced</TabsTrigger>
-                        </TabsList>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Tabs defaultValue="general">
+                    <TabsList>
+                        <TabsTrigger value="general">General</TabsTrigger>
+                        <TabsTrigger value="seo">SEO</TabsTrigger>
+                        <TabsTrigger value="social">Social</TabsTrigger>
+                        <TabsTrigger value="advanced">Advanced</TabsTrigger>
+                    </TabsList>
 
-                        {/* General */}
-                        <TabsContent value="general" className="space-y-4 mt-3">
+                    {/* General */}
+                    <TabsContent value="general" className="space-y-4 mt-3">
                         <Card>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-base">Brand</CardTitle>
@@ -419,8 +405,7 @@ const SiteSettings = () => {
                 loading={maintenanceMutation.isPending}
                 onConfirm={() => maintenanceMutation.mutate()}
             />
-            </div>
-        </>
+        </div>
     )
 }
 
