@@ -156,178 +156,200 @@ const SiteSettings = () => {
                         <TabsTrigger value="advanced">Advanced</TabsTrigger>
                     </TabsList>
 
-                    {/* General */}
-                    <TabsContent value="general" className="space-y-4 mt-3">
-                        <Card>
-                            <CardHeader className="pb-2">
-                                <CardTitle className="text-base">Brand</CardTitle>
-                                <CardDescription>Site name, description and logo</CardDescription>
-                            </CardHeader>
-                            <CardContent className="p-4 pt-0 space-y-3">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="siteName">Site name</Label>
-                                        <Input id="siteName" placeholder="Stakepedia" {...register('siteName')} />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="googleAnalyticsId">Google Analytics ID</Label>
-                                        <Input
-                                            id="googleAnalyticsId"
-                                            placeholder="G-XXXXXXXXXX"
-                                            {...register('googleAnalyticsId')}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="siteDescription">Site description</Label>
-                                    <Textarea
-                                        id="siteDescription"
-                                        placeholder="Discover the best AI tools, courses and prompts"
-                                        rows={2}
-                                        {...register('siteDescription')}
-                                    />
-                                </div>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <Label>Logo</Label>
-                                        <ImageUploader
-                                            value={watch('siteLogo')}
-                                            onChange={(url) => {
-                                                setValue('siteLogo', url || '', { shouldDirty: true })
-                                            }}
-                                            folder="settings"
-                                            label="Upload logo"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label>Favicon</Label>
-                                        <ImageUploader
-                                            value={watch('favicon')}
-                                            onChange={(url) => {
-                                                setValue('favicon', url || '', { shouldDirty: true })
-                                            }}
-                                            folder="settings"
-                                            label="Upload favicon"
-                                        />
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
+                    {/* GENERAL */}
+                    <TabsContent value="general" className="mt-3">
+                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 items-start">
 
-                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-                            <Card className="h-full">
+                            {/* LEFT - Brand + Site behaviour */}
+                            <div className="space-y-4">
+                                <Card>
+                                    <CardHeader className="pb-2">
+                                        <CardTitle className="text-base">Brand</CardTitle>
+                                        <CardDescription>Site name, description and logo</CardDescription>
+                                    </CardHeader>
+                                    <CardContent className="p-4 pt-0 space-y-3">
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <div className="space-y-2">
+                                                <Label htmlFor="siteName">Site name</Label>
+                                                <Input id="siteName" placeholder="Stakepedia" {...register('siteName')} />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label htmlFor="googleAnalyticsId">Google Analytics ID</Label>
+                                                <Input
+                                                    id="googleAnalyticsId"
+                                                    placeholder="G-XXXXXXXXXX"
+                                                    {...register('googleAnalyticsId')}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="siteDescription">Site description</Label>
+                                            <Textarea
+                                                id="siteDescription"
+                                                placeholder="Discover the best AI tools, courses and prompts"
+                                                rows={2}
+                                                {...register('siteDescription')}
+                                            />
+                                        </div>
+                                    </CardContent>
+                                </Card>
+
+                                <Card>
+                                    <CardHeader className="pb-2">
+                                        <CardTitle className="text-base">Site behaviour</CardTitle>
+                                    </CardHeader>
+                                    <CardContent className="p-4 pt-0">
+                                        <div className="flex items-center justify-between p-2.5 rounded-lg bg-muted/50">
+                                            <div>
+                                                <p className="text-sm font-medium">Allow registrations</p>
+                                                <p className="text-xs text-muted-foreground">Let new users create accounts</p>
+                                            </div>
+                                            <Switch
+                                                checked={watch('allowRegistrations')}
+                                                onCheckedChange={(v) => setValue('allowRegistrations', v)}
+                                            />
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </div>
+
+                            {/* RIGHT - Logo/Favicon + Danger zone */}
+                            <div className="space-y-4">
+                                <Card>
+                                    <CardHeader className="pb-2">
+                                        <CardTitle className="text-base">Logo &amp; Favicon</CardTitle>
+                                        <CardDescription>Brand images shown across the site</CardDescription>
+                                    </CardHeader>
+                                    <CardContent className="p-4 pt-0">
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <div className="space-y-2">
+                                                <Label>Logo</Label>
+                                                <ImageUploader
+                                                    value={watch('siteLogo')}
+                                                    onChange={(url) => setValue('siteLogo', url || '', { shouldDirty: true })}
+                                                    folder="settings"
+                                                    label="Upload logo"
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label>Favicon</Label>
+                                                <ImageUploader
+                                                    value={watch('favicon')}
+                                                    onChange={(url) => setValue('favicon', url || '', { shouldDirty: true })}
+                                                    folder="settings"
+                                                    label="Upload favicon"
+                                                />
+                                            </div>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+
+                                <Card className="border-destructive/50">
+                                    <CardHeader className="pb-2">
+                                        <CardTitle className="text-base text-destructive">Danger zone</CardTitle>
+                                        <CardDescription>
+                                            Maintenance mode blocks all public routes with a 503 message
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardContent className="p-4 pt-0">
+                                        <div className="flex items-center justify-between p-2.5 rounded-lg border border-destructive/30 bg-destructive/5">
+                                            <div>
+                                                <p className="text-sm font-medium">Maintenance mode</p>
+                                                <p className="text-xs text-muted-foreground">
+                                                    Currently:{' '}
+                                                    <span className={settings?.maintenanceMode ? 'text-destructive font-semibold' : 'text-green-600 font-semibold'}>
+                                                        {settings?.maintenanceMode ? 'ON' : 'OFF'}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <Button
+                                                type="button"
+                                                variant={settings?.maintenanceMode ? 'outline' : 'destructive'}
+                                                size="sm"
+                                                onClick={() => setMaintenanceDialog(true)}
+                                            >
+                                                {settings?.maintenanceMode ? 'Disable' : 'Enable'}
+                                            </Button>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </div>
+                        </div>
+                    </TabsContent>
+
+                    {/* SEO */}
+                    <TabsContent value="seo" className="mt-3">
+                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 items-start">
+
+                            {/* LEFT - text fields */}
+                            <Card>
                                 <CardHeader className="pb-2">
-                                    <CardTitle className="text-base">Site behaviour</CardTitle>
+                                    <CardTitle className="text-base flex items-center gap-2">
+                                        <Search className="h-4 w-4" /> SEO defaults
+                                    </CardTitle>
+                                    <CardDescription>Default meta tags for pages without specific SEO settings</CardDescription>
                                 </CardHeader>
                                 <CardContent className="p-4 pt-0 space-y-3">
-                                    <div className="flex items-center justify-between p-2.5 rounded-lg bg-muted/50">
-                                        <div>
-                                            <p className="text-sm font-medium">Allow registrations</p>
-                                            <p className="text-xs text-muted-foreground">Let new users create accounts</p>
+                                    <div className="space-y-2">
+                                        <div className="flex items-center justify-between">
+                                            <Label htmlFor="metaTitle">Default meta title</Label>
+                                            <span className="text-xs text-muted-foreground">
+                                                {watch('seo.metaTitle')?.length || 0}/60
+                                            </span>
                                         </div>
-                                        <Switch
-                                            checked={watch('allowRegistrations')}
-                                            onCheckedChange={(v) => setValue('allowRegistrations', v)}
+                                        <Input
+                                            id="metaTitle"
+                                            placeholder="Stakepedia - Discover AI Tools"
+                                            {...register('seo.metaTitle')}
                                         />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <div className="flex items-center justify-between">
+                                            <Label htmlFor="metaDesc">Default meta description</Label>
+                                            <span className="text-xs text-muted-foreground">
+                                                {watch('seo.metaDescription')?.length || 0}/160
+                                            </span>
+                                        </div>
+                                        <Textarea
+                                            id="metaDesc"
+                                            placeholder="Discover and explore the best AI tools, courses and prompts"
+                                            rows={4}
+                                            {...register('seo.metaDescription')}
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="keywords">Keywords</Label>
+                                        <Input
+                                            id="keywords"
+                                            placeholder="ai tools, prompt engineering, machine learning"
+                                            {...register('seo.keywords')}
+                                        />
+                                        <p className="text-xs text-muted-foreground">Comma-separated keywords</p>
                                     </div>
                                 </CardContent>
                             </Card>
 
-                            <Card className="border-destructive/50 h-full">
+                            {/* RIGHT - OG image */}
+                            <Card>
                                 <CardHeader className="pb-2">
-                                    <CardTitle className="text-base text-destructive">Danger zone</CardTitle>
-                                    <CardDescription>
-                                        Maintenance mode blocks all public routes with a 503 message
-                                    </CardDescription>
+                                    <CardTitle className="text-base">OG image</CardTitle>
+                                    <CardDescription>Social sharing preview - recommended 1200×630 px</CardDescription>
                                 </CardHeader>
                                 <CardContent className="p-4 pt-0">
-                                    <div className="flex items-center justify-between p-2.5 rounded-lg border border-destructive/30 bg-destructive/5">
-                                        <div>
-                                            <p className="text-sm font-medium">Maintenance mode</p>
-                                            <p className="text-xs text-muted-foreground">
-                                                Currently: <span className={settings?.maintenanceMode ? 'text-destructive font-semibold' : 'text-green-600 font-semibold'}>
-                                                    {settings?.maintenanceMode ? 'ON' : 'OFF'}
-                                                </span>
-                                            </p>
-                                        </div>
-                                        <Button
-                                            type="button"
-                                            variant={settings?.maintenanceMode ? 'outline' : 'destructive'}
-                                            size="sm"
-                                            onClick={() => setMaintenanceDialog(true)}
-                                        >
-                                            {settings?.maintenanceMode ? 'Disable' : 'Enable'}
-                                        </Button>
-                                    </div>
+                                    <ImageUploader
+                                        value={watch('seo.ogImage')}
+                                        onChange={(url) => setValue('seo.ogImage', url || '', { shouldDirty: true })}
+                                        folder="settings"
+                                        label="Upload OG image (1200×630)"
+                                        aspectRatio="16:9"
+                                    />
                                 </CardContent>
                             </Card>
                         </div>
                     </TabsContent>
 
-                    {/* SEO */}
-                    <TabsContent value="seo" className="space-y-4 mt-3">
-                        <Card>
-                            <CardHeader className="pb-2">
-                                <CardTitle className="text-base flex items-center gap-2">
-                                    <Search className="h-4 w-4" /> SEO defaults
-                                </CardTitle>
-                                <CardDescription>Default meta tags for pages without specific SEO settings</CardDescription>
-                            </CardHeader>
-                            <CardContent className="p-4 pt-0 space-y-3">
-                                <div className="space-y-2">
-                                    <div className="flex items-center justify-between">
-                                        <Label htmlFor="metaTitle">Default meta title</Label>
-                                        <span className="text-xs text-muted-foreground">
-                                            {watch('seo.metaTitle')?.length || 0}/60
-                                        </span>
-                                    </div>
-                                    <Input
-                                        id="metaTitle"
-                                        placeholder="Stakepedia — Discover AI Tools"
-                                        {...register('seo.metaTitle')}
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <div className="flex items-center justify-between">
-                                        <Label htmlFor="metaDesc">Default meta description</Label>
-                                        <span className="text-xs text-muted-foreground">
-                                            {watch('seo.metaDescription')?.length || 0}/160
-                                        </span>
-                                    </div>
-                                    <Textarea
-                                        id="metaDesc"
-                                        placeholder="Discover and explore the best AI tools, courses and prompts"
-                                        rows={3}
-                                        {...register('seo.metaDescription')}
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="keywords">Keywords</Label>
-                                    <Input
-                                        id="keywords"
-                                        placeholder="ai tools, prompt engineering, machine learning"
-                                        {...register('seo.keywords')}
-                                    />
-                                    <p className="text-xs text-muted-foreground">Comma-separated keywords</p>
-                                </div>
-                                <div className="space-y-2">
-                                    <Label>OG image</Label>
-                                    <ImageUploader
-                                        value={watch('seo.ogImage')}
-                                        onChange={(url) => {
-                                            setValue('seo.ogImage', url || '', { shouldDirty: true })
-                                        }}
-                                        folder="settings"
-                                        label="Upload OG image (1200×630)"
-                                        aspectRatio="16:9"
-                                    />
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </TabsContent>
-
-                    {/* Social */}
-                    <TabsContent value="social" className="space-y-4 mt-3">
+                    {/* SOCIAL */}
+                    <TabsContent value="social" className="mt-3">
                         <Card>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-base flex items-center gap-2">
@@ -335,58 +357,64 @@ const SiteSettings = () => {
                                 </CardTitle>
                                 <CardDescription>Links shown in the footer and social sections</CardDescription>
                             </CardHeader>
-                            <CardContent className="p-4 pt-0 grid grid-cols-1 md:grid-cols-2 gap-3">
-                                {[
-                                    { key: 'twitter', label: 'Twitter / X', placeholder: 'https://twitter.com/...' },
-                                    { key: 'github', label: 'GitHub', placeholder: 'https://github.com/...' },
-                                    { key: 'linkedin', label: 'LinkedIn', placeholder: 'https://linkedin.com/...' },
-                                    { key: 'discord', label: 'Discord', placeholder: 'https://discord.gg/...' },
-                                    { key: 'youtube', label: 'YouTube', placeholder: 'https://youtube.com/...' },
-                                ].map(({ key, label, placeholder }) => (
-                                    <div key={key} className="space-y-2">
-                                        <Label>{label}</Label>
-                                        <Input
-                                            placeholder={placeholder}
-                                            {...register(`socialLinks.${key}`)}
-                                        />
-                                    </div>
-                                ))}
+                            <CardContent className="p-4 pt-0">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    {[
+                                        { key: 'twitter',  label: 'Twitter / X', placeholder: 'https://twitter.com/...'  },
+                                        { key: 'github',   label: 'GitHub',      placeholder: 'https://github.com/...'   },
+                                        { key: 'linkedin', label: 'LinkedIn',    placeholder: 'https://linkedin.com/...' },
+                                        { key: 'discord',  label: 'Discord',     placeholder: 'https://discord.gg/...'   },
+                                        { key: 'youtube',  label: 'YouTube',     placeholder: 'https://youtube.com/...'  },
+                                    ].map(({ key, label, placeholder }) => (
+                                        <div key={key} className="space-y-2">
+                                            <Label>{label}</Label>
+                                            <Input placeholder={placeholder} {...register(`socialLinks.${key}`)} />
+                                        </div>
+                                    ))}
+                                </div>
                             </CardContent>
                         </Card>
                     </TabsContent>
 
-                    {/* Advanced */}
-                    <TabsContent value="advanced" className="space-y-4 mt-3">
-                        <Card>
-                            <CardHeader className="pb-2">
-                                <CardTitle className="text-base flex items-center gap-2">
-                                    <Code className="h-4 w-4" /> Custom scripts
-                                </CardTitle>
-                                <CardDescription>Inject custom HTML/JS into the site head or body</CardDescription>
-                            </CardHeader>
-                            <CardContent className="p-4 pt-0 space-y-3">
-                                <div className="space-y-2">
-                                    <Label htmlFor="headerScripts">Header scripts</Label>
+                    {/* ADVANCED */}
+                    <TabsContent value="advanced" className="mt-3">
+                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 items-start">
+                            <Card>
+                                <CardHeader className="pb-2">
+                                    <CardTitle className="text-base flex items-center gap-2">
+                                        <Code className="h-4 w-4" /> Header scripts
+                                    </CardTitle>
+                                    <CardDescription>Injected before &lt;/head&gt;</CardDescription>
+                                </CardHeader>
+                                <CardContent className="p-4 pt-0">
                                     <Textarea
                                         id="headerScripts"
                                         placeholder="<!-- Scripts injected before </head> -->"
-                                        rows={5}
+                                        rows={10}
                                         className="font-mono text-xs"
                                         {...register('customHeaderScripts')}
                                     />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="footerScripts">Footer scripts</Label>
+                                </CardContent>
+                            </Card>
+
+                            <Card>
+                                <CardHeader className="pb-2">
+                                    <CardTitle className="text-base flex items-center gap-2">
+                                        <Code className="h-4 w-4" /> Footer scripts
+                                    </CardTitle>
+                                    <CardDescription>Injected before &lt;/body&gt;</CardDescription>
+                                </CardHeader>
+                                <CardContent className="p-4 pt-0">
                                     <Textarea
                                         id="footerScripts"
                                         placeholder="<!-- Scripts injected before </body> -->"
-                                        rows={5}
+                                        rows={10}
                                         className="font-mono text-xs"
                                         {...register('customFooterScripts')}
                                     />
-                                </div>
-                            </CardContent>
-                        </Card>
+                                </CardContent>
+                            </Card>
+                        </div>
                     </TabsContent>
                 </Tabs>
             </form>

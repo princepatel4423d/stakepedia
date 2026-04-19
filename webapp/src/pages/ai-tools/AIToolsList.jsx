@@ -2,11 +2,9 @@ import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams, Link } from 'react-router-dom'
 import {
-  Search, X, Bot, Star, Eye, Zap, ArrowRight,
-  SlidersHorizontal, ChevronDown, Sparkles, TrendingUp
+  Search, X, Bot, Eye, Zap, Sparkles,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import {
   Select, SelectContent, SelectItem,
@@ -19,14 +17,6 @@ import EmptyState from '@/components/common/EmptyState'
 import { SubmitToolBanner, NewsletterBanner } from '@/components/common/Banners'
 import { aiToolsApi } from '@/api/aitools.api'
 import { categoriesApi } from '@/api/categories.api'
-
-const PRICING_COLORS = {
-  free: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20',
-  freemium: 'bg-blue-500/10 text-blue-600 border-blue-500/20',
-  paid: 'bg-violet-500/10 text-violet-600 border-violet-500/20',
-  'open-source': 'bg-amber-500/10 text-amber-600 border-amber-500/20',
-  contact: 'bg-slate-500/10 text-slate-600 border-slate-500/20',
-}
 
 function ToolCard({ tool }) {
   const [hovered, setHovered] = useState(false)
@@ -133,7 +123,6 @@ function ToolCardSkeleton() {
 export default function AIToolsList() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [searchInput, setSearchInput] = useState(searchParams.get('q') || '')
-  const [filtersOpen, setFiltersOpen] = useState(false)
 
   const page = Number(searchParams.get('page') || 1)
   const search = searchParams.get('q') || ''
@@ -305,16 +294,11 @@ export default function AIToolsList() {
         </div>
       ) : items.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {/* First half */}
           {firstHalf.map((tool) => (
             <ToolCard key={tool._id} tool={tool} />
           ))}
-
-          {/* Mid-list banners */}
           <SubmitToolBanner />
           <NewsletterBanner />
-
-          {/* Second half */}
           {secondHalf.map((tool) => (
             <ToolCard key={tool._id} tool={tool} />
           ))}

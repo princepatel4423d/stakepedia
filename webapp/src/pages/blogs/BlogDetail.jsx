@@ -341,7 +341,7 @@ export default function BlogDetail() {
               {blog.tags.map((tag) => (
                 <Link key={tag._id || tag} to={`/blogs?tag=${tag.slug || tag}`}
                   className="inline-flex items-center gap-1 px-3 py-1 rounded-full border border-border text-xs text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-accent transition-all">
-                  <Tag className="h-2.5 w-2.5" />#{tag.name || tag}
+                  <Tag className="h-2.5 w-2.5" />{tag.name || tag}
                 </Link>
               ))}
             </div>
@@ -476,7 +476,7 @@ export default function BlogDetail() {
                 {blog.tags.map((tag) => (
                   <Link key={tag._id || tag} to={`/blogs?tag=${tag.slug || tag}`}
                     className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full border border-border text-[11px] text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-accent transition-all">
-                    #{tag.name || tag}
+                    <Tag className="h-2.5 w-2.5" />{tag.name || tag}
                   </Link>
                 ))}
               </div>
