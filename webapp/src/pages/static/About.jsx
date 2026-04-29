@@ -11,6 +11,7 @@ import { coursesApi } from '@/api/courses.api'
 import { promptsApi } from '@/api/prompts.api'
 import { statsApi } from '@/api/stats.api'
 import { blogsApi } from '@/api/blogs.api'
+import SEO from '@/components/common/SEO'
 
 const VALUES = [
     {
@@ -103,6 +104,13 @@ export default function About() {
 
     return (
         <div className="pt-6">
+
+            <SEO
+                title="About Us | Stakepedia"
+                description="Stakepedia was built to help people navigate the AI revolution. Learn about our mission, values and the story behind the most trusted AI tools directory."
+                keywords="about Stakepedia, AI tools directory, our mission, AI resource hub"
+                canonicalUrl="https://stakepedia.info/about"
+            />
 
             {/* HERO */}
             <section className="relative py-12 overflow-hidden">

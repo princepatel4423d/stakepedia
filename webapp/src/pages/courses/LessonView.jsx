@@ -11,6 +11,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import EmptyState from '@/components/common/EmptyState'
 import { coursesApi } from '@/api/courses.api'
 import { useAuthStore } from '@/store/authStore'
+import SEO from '@/components/common/SEO'
 
 function formatDuration(minutes) {
   if (!minutes) return null
@@ -93,6 +94,14 @@ export default function LessonView() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-24 pb-16">
+
+      <SEO
+        title={`${lesson.title} — ${course.title} | Stakepedia`}
+        description={`Lesson ${currentIndex + 1} of ${lessons.length} in ${course.title}. ${course.shortDescription || course.description || ''}`}
+        canonicalUrl={`https://stakepedia.info/courses/${slug}/${lesson._id}`}
+        ogImage={course.coverImage}
+        ogType="article"
+      />
 
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">

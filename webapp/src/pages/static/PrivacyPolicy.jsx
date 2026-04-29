@@ -5,6 +5,7 @@ import {
     Lock, Users, Database, Eye, Trash2,
     AlertCircle, Baby, RefreshCw, Share2,
 } from 'lucide-react'
+import SEO from '@/components/common/SEO'
 
 const LAST_UPDATED = '2026-01-15'
 
@@ -211,6 +212,14 @@ export default function PrivacyPolicy() {
 
     return (
         <div className="pt-8">
+
+            <SEO
+                title="Privacy Policy | Stakepedia"
+                description="Learn how Stakepedia collects, uses and protects your personal data. GDPR, CCPA and DPDPA compliant. Last updated January 2026."
+                canonicalUrl="https://stakepedia.info/privacy"
+                noIndex
+            />
+
             <div className="max-w-7xl mx-auto px-4 py-12">
 
                 {/* Page header */}

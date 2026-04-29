@@ -17,6 +17,7 @@ import EmptyState from '@/components/common/EmptyState'
 import { SubmitToolBanner, NewsletterBanner } from '@/components/common/Banners'
 import { aiToolsApi } from '@/api/aitools.api'
 import { categoriesApi } from '@/api/categories.api'
+import SEO from '@/components/common/SEO'
 
 function ToolCard({ tool }) {
   const [hovered, setHovered] = useState(false)
@@ -181,6 +182,13 @@ export default function AIToolsList() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-24 pb-16">
+
+      <SEO
+      title="Discover AI Tools | Stakepedia"
+      description={`Explore ${data?.pagination?.total?.toLocaleString() || 'thousands of'} curated AI tools to supercharge your workflow.`}
+      keywords="AI tools, artificial intelligence, productivity, automation"
+      canonicalUrl="https://stakepedia.info/ai-tools"
+    />
 
       {/* Header */}
       <div className="mb-10">

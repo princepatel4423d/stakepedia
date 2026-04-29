@@ -10,29 +10,30 @@ import {
   Shield, ShieldCheck, Mail, AlertTriangle, User,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { Button }    from '@/components/ui/button'
-import { Input }     from '@/components/ui/input'
-import { Label }     from '@/components/ui/label'
-import { Textarea }  from '@/components/ui/textarea'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
 import { Separator } from '@/components/ui/separator'
-import { Badge }     from '@/components/ui/badge'
+import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   Card, CardContent, CardHeader, CardTitle, CardDescription,
 } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useAuthStore }  from '@/store/authStore'
-import { profileApi }    from '@/api/profile.api'
-import { formatDate }    from '@/lib/utils'
+import { useAuthStore } from '@/store/authStore'
+import { profileApi } from '@/api/profile.api'
+import { formatDate } from '@/lib/utils'
+import SEO from '@/components/common/SEO'
 
 // Schemas
 const profileSchema = z.object({
-  name:    z.string().min(2, 'At least 2 characters').max(50),
-  bio:     z.string().max(300, 'Max 300 characters').optional().or(z.literal('')),
+  name: z.string().min(2, 'At least 2 characters').max(50),
+  bio: z.string().max(300, 'Max 300 characters').optional().or(z.literal('')),
   website: z.string().url('Enter a valid URL').optional().or(z.literal('')),
   twitter: z.string().url('Enter a valid URL').optional().or(z.literal('')),
-  github:  z.string().url('Enter a valid URL').optional().or(z.literal('')),
-  linkedin:z.string().url('Enter a valid URL').optional().or(z.literal('')),
+  github: z.string().url('Enter a valid URL').optional().or(z.literal('')),
+  linkedin: z.string().url('Enter a valid URL').optional().or(z.literal('')),
 })
 
 const passwordSchema = z.object({
@@ -51,10 +52,10 @@ const passwordSchema = z.object({
 // Password strength
 function PasswordStrength({ password = '' }) {
   const checks = [
-    { label: '8+ characters',     met: password.length >= 8 },
-    { label: 'Uppercase letter',  met: /[A-Z]/.test(password) },
-    { label: 'Lowercase letter',  met: /[a-z]/.test(password) },
-    { label: 'Number',            met: /[0-9]/.test(password) },
+    { label: '8+ characters', met: password.length >= 8 },
+    { label: 'Uppercase letter', met: /[A-Z]/.test(password) },
+    { label: 'Lowercase letter', met: /[a-z]/.test(password) },
+    { label: 'Number', met: /[0-9]/.test(password) },
     { label: 'Special character', met: /[^A-Za-z0-9]/.test(password) },
   ]
   const score = checks.filter((c) => c.met).length
@@ -92,17 +93,17 @@ function PasswordStrength({ password = '' }) {
 
 // Main
 export default function ProfileSettings() {
-  const user        = useAuthStore((s) => s.user)
-  const updateUser  = useAuthStore((s) => s.updateUser)
+  const user = useAuthStore((s) => s.user)
+  const updateUser = useAuthStore((s) => s.updateUser)
   const [showCurrent, setShowCurrent] = useState(false)
-  const [showNew,     setShowNew]     = useState(false)
-  const [uploading,   setUploading]   = useState(false)
+  const [showNew, setShowNew] = useState(false)
+  const [uploading, setUploading] = useState(false)
 
   // Fetch fresh profile data
   const { data: profile } = useQuery({
     queryKey: ['profile-me-settings'],
-    queryFn:  profileApi.get,
-    select:   (res) => res.data.data,
+    queryFn: profileApi.get,
+    select: (res) => res.data.data,
   })
 
   const currentUser = profile || user
@@ -117,11 +118,11 @@ export default function ProfileSettings() {
   } = useForm({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      name:     '',
-      bio:      '',
-      website:  '',
-      twitter:  '',
-      github:   '',
+      name: '',
+      bio: '',
+      website: '',
+      twitter: '',
+      github: '',
       linkedin: '',
     },
   })
@@ -141,11 +142,11 @@ export default function ProfileSettings() {
   useEffect(() => {
     if (currentUser) {
       reset({
-        name:     currentUser.name     || '',
-        bio:      currentUser.bio      || '',
-        website:  currentUser.website  || '',
-        twitter:  currentUser.social?.twitter  || '',
-        github:   currentUser.social?.github   || '',
+        name: currentUser.name || '',
+        bio: currentUser.bio || '',
+        website: currentUser.website || '',
+        twitter: currentUser.social?.twitter || '',
+        github: currentUser.social?.github || '',
         linkedin: currentUser.social?.linkedin || '',
       })
     }
@@ -154,12 +155,12 @@ export default function ProfileSettings() {
   // Profile update mutation
   const profileMutation = useMutation({
     mutationFn: (data) => profileApi.update({
-      name:    data.name,
-      bio:     data.bio     || null,
+      name: data.name,
+      bio: data.bio || null,
       website: data.website || null,
       social: {
-        twitter:  data.twitter  || null,
-        github:   data.github   || null,
+        twitter: data.twitter || null,
+        github: data.github || null,
         linkedin: data.linkedin || null,
       },
     }),
@@ -206,6 +207,13 @@ export default function ProfileSettings() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-20">
+
+      <SEO
+        title="Account Settings | Stakepedia"
+        description="Manage your Stakepedia profile, password, and account preferences."
+        noIndex
+      />
+
       {/* Header */}
       <div className="flex items-center gap-4 mb-2">
         <Link
@@ -225,13 +233,13 @@ export default function ProfileSettings() {
 
       <Tabs defaultValue="profile">
         <TabsList className="w-full sm:w-auto mb-8">
-          <TabsTrigger value="profile"  className="gap-2 flex-1 sm:flex-none">
+          <TabsTrigger value="profile" className="gap-2 flex-1 sm:flex-none">
             <User className="h-4 w-4" /> Profile
           </TabsTrigger>
           <TabsTrigger value="security" className="gap-2 flex-1 sm:flex-none">
             <Shield className="h-4 w-4" /> Security
           </TabsTrigger>
-          <TabsTrigger value="account"  className="gap-2 flex-1 sm:flex-none">
+          <TabsTrigger value="account" className="gap-2 flex-1 sm:flex-none">
             <Mail className="h-4 w-4" /> Account
           </TabsTrigger>
         </TabsList>
@@ -557,22 +565,20 @@ export default function ProfileSettings() {
               <CardTitle className="text-base">Email verification</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className={`flex items-start gap-3 p-4 rounded-xl ${
-                currentUser?.isEmailVerified
+              <div className={`flex items-start gap-3 p-4 rounded-xl ${currentUser?.isEmailVerified
                   ? 'bg-green-50 dark:bg-green-900/20'
                   : 'bg-amber-50 dark:bg-amber-900/20'
-              }`}>
+                }`}>
                 {currentUser?.isEmailVerified ? (
                   <ShieldCheck className="h-5 w-5 text-green-600 dark:text-green-400 shrink-0 mt-0.5" />
                 ) : (
                   <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
                 )}
                 <div>
-                  <p className={`text-sm font-medium ${
-                    currentUser?.isEmailVerified
+                  <p className={`text-sm font-medium ${currentUser?.isEmailVerified
                       ? 'text-green-800 dark:text-green-300'
                       : 'text-amber-800 dark:text-amber-300'
-                  }`}>
+                    }`}>
                     {currentUser?.isEmailVerified ? 'Email verified' : 'Email not verified'}
                   </p>
                   <p className="text-xs text-muted-foreground mt-0.5">
@@ -597,11 +603,11 @@ export default function ProfileSettings() {
             <CardContent>
               <div className="space-y-3 text-sm">
                 {[
-                  { label: 'Member since',    value: formatDate(currentUser?.createdAt) },
-                  { label: 'Last login',      value: currentUser?.lastLogin ? formatDate(currentUser.lastLogin) : 'N/A' },
-                  { label: 'Sign-in method',  value: currentUser?.authProvider === 'google' ? 'Google OAuth' : 'Email & password' },
-                  { label: 'Account status',  value: currentUser?.isActive ? 'Active' : 'Inactive' },
-                  { label: 'Email verified',  value: currentUser?.isEmailVerified ? 'Yes' : 'No' },
+                  { label: 'Member since', value: formatDate(currentUser?.createdAt) },
+                  { label: 'Last login', value: currentUser?.lastLogin ? formatDate(currentUser.lastLogin) : 'N/A' },
+                  { label: 'Sign-in method', value: currentUser?.authProvider === 'google' ? 'Google OAuth' : 'Email & password' },
+                  { label: 'Account status', value: currentUser?.isActive ? 'Active' : 'Inactive' },
+                  { label: 'Email verified', value: currentUser?.isEmailVerified ? 'Yes' : 'No' },
                 ].map(({ label, value }) => (
                   <div key={label} className="flex items-center justify-between py-2 border-b last:border-0">
                     <span className="text-muted-foreground">{label}</span>

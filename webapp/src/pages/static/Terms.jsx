@@ -6,6 +6,7 @@ import {
     CheckCircle, Users, Shield, AlertTriangle,
     Ban, Cpu, Info, Scale, Globe, MessageSquare,
 } from 'lucide-react'
+import SEO from '@/components/common/SEO'
 
 const LAST_UPDATED = '2026-01-15'
 
@@ -223,6 +224,14 @@ export default function Terms() {
 
     return (
         <div className="pt-8">
+
+            <SEO
+                title="Terms of Service | Stakepedia"
+                description="Read Stakepedia's Terms of Service. Understand your rights, responsibilities and our platform policies before using the Service."
+                canonicalUrl="https://stakepedia.info/terms"
+                noIndex
+            />
+
             <div className="max-w-7xl mx-auto px-4 py-12">
 
                 {/* Page header */}

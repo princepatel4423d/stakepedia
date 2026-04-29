@@ -17,6 +17,7 @@ import {
     Select, SelectContent, SelectItem,
     SelectTrigger, SelectValue,
 } from '@/components/ui/select'
+import SEO from '@/components/common/SEO'
 
 /* Schema */
 const schema = z.object({
@@ -100,6 +101,13 @@ export default function Contact() {
     /* Main UI */
     return (
         <div className="py-8">
+
+            <SEO
+                title="Contact Us | Stakepedia"
+                description="Get in touch with the Stakepedia team. Submit an AI tool, report a bug, explore partnerships or get account support. We reply within 24 hours."
+                keywords="contact Stakepedia, submit AI tool, partnership, support"
+                canonicalUrl="https://stakepedia.info/contact"
+            />
 
             {/* Hero */}
             <section className="relative py-12 overflow-hidden border-b border-border">

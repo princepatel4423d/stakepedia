@@ -24,6 +24,7 @@ import { reviewsApi } from '@/api/reviews.api'
 import { useAuthStore } from '@/store/authStore'
 import { formatDate, formatNumber } from '@/lib/utils'
 import { toast } from 'sonner'
+import SEO from '@/components/common/SEO'
 
 /* small helpers */
 
@@ -195,6 +196,15 @@ export default function AIToolDetail() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-24 pb-16">
+
+      <SEO
+      title={tool.meta?.title || `${tool.name} | Stakepedia`}
+      description={tool.meta?.description || tool.shortDescription || tool.description}
+      keywords={tool.tags?.map(t => t.name || t).join(', ')}
+      canonicalUrl={`https://stakepedia.info/ai-tools/${tool.slug}`}
+      ogImage={tool.coverImage || tool.logo}
+      ogType="article"
+    />
 
       {/* Back */}
       <Link to="/ai-tools" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors group">

@@ -17,6 +17,7 @@ import { CoursesBanner, JoinCommunityBanner } from '@/components/common/Banners'
 import { promptsApi } from '@/api/prompts.api'
 import { useAuthStore } from '@/store/authStore'
 import { toast } from 'sonner'
+import SEO from '@/components/common/SEO'
 
 function PromptCard({ prompt }) {
   const qc = useQueryClient()
@@ -134,8 +135,8 @@ export default function PromptsList() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [searchInput, setSearchInput] = useState(searchParams.get('q') || '')
 
-  const page     = Number(searchParams.get('page')     || 1)
-  const search   = searchParams.get('q')        || ''
+  const page = Number(searchParams.get('page') || 1)
+  const search = searchParams.get('q') || ''
   const category = searchParams.get('category') || ''
   const featured = searchParams.get('featured') || ''
 
@@ -172,15 +173,22 @@ export default function PromptsList() {
   }
 
   const hasFilters = search || category || featured
-  const items      = data?.items || []
+  const items = data?.items || []
 
   /* ── Split items at midpoint for banner injection ── */
-  const mid         = Math.ceil(items.length / 2)
-  const firstHalf   = items.slice(0, mid)
-  const secondHalf  = items.slice(mid)
+  const mid = Math.ceil(items.length / 2)
+  const firstHalf = items.slice(0, mid)
+  const secondHalf = items.slice(mid)
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-24 pb-16">
+
+      <SEO
+        title="Prompt Library | Stakepedia"
+        description="Browse 1000+ ready-to-use AI prompts for coding, writing, marketing, SEO and more. Copy and use instantly with variable support."
+        keywords="AI prompts, prompt library, ChatGPT prompts, copy prompts, AI workflow"
+        canonicalUrl="https://stakepedia.info/prompts"
+      />
 
       {/* Header */}
       <div className="mb-10">

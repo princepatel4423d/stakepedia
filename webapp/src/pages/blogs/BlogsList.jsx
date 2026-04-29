@@ -12,6 +12,7 @@ import EmptyState from '@/components/common/EmptyState'
 import { NewsletterBanner, CoursesBanner } from '@/components/common/Banners'
 import { blogsApi } from '@/api/blogs.api'
 import { formatDate, readTime } from '@/lib/utils'
+import SEO from '@/components/common/SEO'
 
 /* Big featured hero (left side) */
 function HeroBlogCard({ blog }) {
@@ -226,6 +227,13 @@ export default function BlogsList() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-24 pb-16">
+
+      <SEO
+        title="Tips & Insights | Stakepedia Blog"
+        description="Tutorials, deep-dives and thoughts on AI tools and productivity. Explore curated articles to supercharge your workflow."
+        keywords="AI tools, productivity, tutorials, blog, insights"
+        canonicalUrl="https://stakepedia.info/blogs"
+      />
 
       {/* Header */}
       <div className="mb-10">

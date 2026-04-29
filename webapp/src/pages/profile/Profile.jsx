@@ -19,6 +19,7 @@ import EmptyState from '@/components/common/EmptyState'
 import { profileApi } from '@/api/profile.api'
 import { useAuthStore } from '@/store/authStore'
 import { formatDate, formatNumber } from '@/lib/utils'
+import SEO from '@/components/common/SEO'
 
 // Stat card
 function StatCard({ icon: Icon, value, label, color = 'bg-primary/10 text-primary' }) {
@@ -139,6 +140,12 @@ export default function Profile() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-12 pb-16 space-y-6">
+
+      <SEO
+        title={`${currentUser?.name || 'My Profile'} | Stakepedia`}
+        description={currentUser?.bio || `View ${currentUser?.name || 'user'}'s profile, saved tools, reviews and activity on Stakepedia.`}
+        noIndex
+      />
 
       {/* Ban notice */}
       {isBanned && (

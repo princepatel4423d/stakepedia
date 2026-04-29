@@ -18,6 +18,7 @@ import Pagination from '@/components/common/Pagination'
 import EmptyState from '@/components/common/EmptyState'
 import { BlogsBanner, PromptsBanner } from '@/components/common/Banners'
 import { coursesApi } from '@/api/courses.api'
+import SEO from '@/components/common/SEO'
 
 const LEVEL_COLORS = {
   beginner: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20',
@@ -173,6 +174,13 @@ export default function CoursesList() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-24 pb-16">
+
+      <SEO
+        title="Courses | Stakepedia"
+        description="Master AI skills with structured, hands-on courses built for every level. Browse free and paid courses on AI tools and productivity."
+        keywords="AI courses, learn AI, online courses, productivity, tutorials"
+        canonicalUrl="https://stakepedia.info/courses"
+      />
 
       {/* Header */}
       <div className="mb-10">

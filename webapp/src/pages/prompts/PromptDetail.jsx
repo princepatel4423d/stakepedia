@@ -18,6 +18,7 @@ import { reviewsApi } from '@/api/reviews.api'
 import { useAuthStore } from '@/store/authStore'
 import { formatDate } from '@/lib/utils'
 import { toast } from 'sonner'
+import SEO from '@/components/common/SEO'
 
 export default function PromptDetail() {
   const { slug } = useParams()
@@ -130,6 +131,14 @@ export default function PromptDetail() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-24 pb-16">
+
+      <SEO
+        title={`${prompt.title} | Stakepedia Prompts`}
+        description={prompt.description || `${prompt.category || 'AI'} prompt with ${prompt.variables?.length || 0} variables. Used ${(prompt.usageCount || 0).toLocaleString()} times on Stakepedia.`}
+        keywords={prompt.tags?.map((t) => t.name || t).join(', ')}
+        canonicalUrl={`https://stakepedia.info/prompts/${prompt.slug}`}
+        ogType="article"
+      />
 
       {/* Back */}
       <Link to="/prompts" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-8 transition-colors group">

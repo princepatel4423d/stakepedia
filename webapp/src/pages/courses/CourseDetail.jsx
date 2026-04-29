@@ -18,6 +18,7 @@ import { reviewsApi } from '@/api/reviews.api'
 import { useAuthStore } from '@/store/authStore'
 import { formatDate } from '@/lib/utils'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import SEO from '@/components/common/SEO'
 
 const LEVEL_COLORS = {
   beginner: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20',
@@ -90,6 +91,15 @@ export default function CourseDetail() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-24 pb-16">
+
+      <SEO
+        title={`${course.title} | Stakepedia`}
+        description={course.shortDescription || course.description}
+        keywords={course.tags?.join(', ')}
+        canonicalUrl={`https://stakepedia.info/courses/${course.slug}`}
+        ogImage={course.coverImage}
+        ogType="article"
+      />
 
       {/* Back */}
       <Link to="/courses" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-8 transition-colors group">

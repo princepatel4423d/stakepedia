@@ -16,6 +16,7 @@ import { blogsApi } from '@/api/blogs.api'
 import { useAuthStore } from '@/store/authStore'
 import { formatDate, readTime } from '@/lib/utils'
 import { toast } from 'sonner'
+import SEO from '@/components/common/SEO'
 
 /* Parse h2/h3 headings from HTML for TOC */
 function parseHeadings(html = '') {
@@ -282,6 +283,15 @@ export default function BlogDetail() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-24 pb-16">
+
+      <SEO
+        title={blog.meta?.title || `${blog.title} | Stakepedia`}
+        description={blog.meta?.description || blog.excerpt || blog.title}
+        keywords={blog.tags?.map((t) => t.name || t).join(', ')}
+        canonicalUrl={`https://stakepedia.info/blogs/${blog.slug}`}
+        ogImage={blog.coverImage}
+        ogType="article"
+      />
 
       {/* Back */}
       <Link to="/blogs" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-8 transition-colors group">

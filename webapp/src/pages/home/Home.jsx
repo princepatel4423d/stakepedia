@@ -21,6 +21,7 @@ import { statsApi } from '@/api/stats.api'
 import { formatDate, readTime } from '@/lib/utils'
 import Hero from './Hero'
 import CTASection from './CTASection'
+import SEO from '@/components/common/SEO'
 
 /* Tool card */
 function ToolCard({ tool }) {
@@ -223,6 +224,14 @@ export default function Home() {
 
   return (
     <div className="overflow-x-hidden">
+
+      <SEO
+        title="Stakepedia — Discover AI Tools, Courses & Prompts"
+        description="Explore 500+ curated AI tools, structured courses, and 1000+ ready-to-use prompts. Your all-in-one hub to discover, learn and master AI."
+        keywords="AI tools, AI courses, prompt library, artificial intelligence, productivity, learn AI"
+        canonicalUrl="https://stakepedia.info"
+        ogImage="https://stakepedia.info/og-image.png"
+      />
 
       <Hero
         heroPills={tools}
